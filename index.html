@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Journey — Stories of the 1947 India–Pakistan Partition</title>
+<meta name="description" content="An interactive digital museum and memorial retracing the human story of the 1947 India–Pakistan Partition, inspired by Khushwant Singh's Train to Pakistan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%232b1d10'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%F0%9F%9A%82%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Scroll progress: a small train riding the rails of the page -->
+<div class="progress-track" aria-hidden="true">
+  <div class="progress-track__fill" id="progress-fill"></div>
+  <div class="progress-track__engine" id="progress-engine">🚂</div>
+</div>
+
+<div class="whistle-caption" id="whistle-caption" role="status" aria-live="polite">Whistle blows — changing carriage</div>
+
+<div class="door-transition" id="door-transition" aria-hidden="true">
+  <div class="door-transition__panel"></div>
+  <div class="door-transition__panel"></div>
+</div>
+
+<div class="overlay-scrim" id="overlay-scrim"></div>
+
+<!-- Railway route navigation -->
+<nav class="route-bar" id="route-bar" aria-label="Train route (site navigation)">
+  <div class="route-bar__inner">
+    <span class="route-bar__brand">🚆 THE LAST JOURNEY</span>
+    <div class="route-scroller" id="route-scroller" role="list">
+      <!-- populated by JS from CARRIAGES -->
+    </div>
+    <div class="controls-toggle">
+      <button class="icon-btn" id="search-toggle" aria-haspopup="dialog" aria-controls="settings-panel" title="Search the archive">🔎<span class="visually-hidden">Search</span></button>
+      <button class="icon-btn" id="settings-toggle" aria-haspopup="dialog" aria-controls="settings-panel" title="Accessibility &amp; display settings">⚙️<span class="visually-hidden">Settings</span></button>
+      <button class="icon-btn" id="sound-toggle" aria-pressed="false" title="Toggle train ambience">🔇<span class="visually-hidden">Toggle sound</span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Settings / search drawer -->
+<aside class="settings-panel" id="settings-panel" role="dialog" aria-label="Display settings and search" aria-hidden="true">
+  <button class="settings-close" id="settings-close" aria-label="Close settings">✕</button>
+  <h2>Journey Settings</h2>
+
+  <div class="settings-group">
+    <h3>Search the archive</h3>
+    <form class="search-form" id="search-form" role="search">
+      <label class="visually-hidden" for="search-input">Search carriages, stories and timeline events</label>
+      <input type="search" id="search-input" placeholder="e.g. Radcliffe, Nooran, refugee camps…">
+      <button class="btn" type="submit">Go</button>
+    </form>
+    <div id="search-results" aria-live="polite"></div>
+  </div>
+
+  <div class="settings-group">
+    <h3>Appearance</h3>
+    <div class="settings-row">
+      <button class="pill-btn" id="theme-toggle" aria-pressed="false">🌙 Dark mode</button>
+      <button class="pill-btn" id="contrast-toggle" aria-pressed="false">◐ High contrast</button>
+    </div>
+  </div>
+
+  <div class="settings-group">
+    <h3>Text size</h3>
+    <div class="settings-row">
+      <button class="pill-btn" id="font-decrease">A−</button>
+      <button class="pill-btn" id="font-reset">Reset</button>
+      <button class="pill-btn" id="font-increase">A+</button>
+    </div>
+  </div>
+
+  <div class="settings-group">
+    <h3>Motion</h3>
+    <div class="settings-row">
+      <button class="pill-btn" id="motion-toggle" aria-pressed="false">🎞️ Reduce animation</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ===================================================================
+     HERO — Station at dawn
+     =================================================================== -->
+<header class="hero" id="hero">
+  <div class="hero__sky-glow" aria-hidden="true"></div>
+  <div class="hero__title-block">
+    <span class="hero__eyebrow">Platform One · Pre-Partition Punjab · Dawn</span>
+    <h1 class="hero__title">The Last Journey</h1>
+    <p class="hero__subtitle">Stories of the 1947 India–Pakistan Partition</p>
+    <button class="board-btn" id="board-train-btn">Board the Train</button>
+    <p class="hero__hint">A slow, respectful journey. Best experienced with sound on. Headphones recommended.</p>
+  </div>
+
+  <div class="hero__scene train-rig" aria-hidden="true">
+    <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a steam locomotive waiting at a station platform at dawn">
+      <title>A steam locomotive waiting at a station platform at dawn</title>
+      <rect x="0" y="185" width="900" height="8" fill="#3c2412"/>
+      <rect x="0" y="196" width="900" height="6" fill="#241708"/>
+      <g fill="none" stroke="#5c4322" stroke-width="4">
+        <line x1="10" y1="185" x2="10" y2="205"/><line x1="60" y1="185" x2="60" y2="205"/>
+        <line x1="110" y1="185" x2="110" y2="205"/><line x1="160" y1="185" x2="160" y2="205"/>
+        <line x1="210" y1="185" x2="210" y2="205"/><line x1="260" y1="185" x2="260" y2="205"/>
+        <line x1="310" y1="185" x2="310" y2="205"/><line x1="360" y1="185" x2="360" y2="205"/>
+        <line x1="410" y1="185" x2="410" y2="205"/><line x1="460" y1="185" x2="460" y2="205"/>
+        <line x1="510" y1="185" x2="510" y2="205"/><line x1="560" y1="185" x2="560" y2="205"/>
+        <line x1="610" y1="185" x2="610" y2="205"/><line x1="660" y1="185" x2="660" y2="205"/>
+        <line x1="710" y1="185" x2="710" y2="205"/><line x1="760" y1="185" x2="760" y2="205"/>
+        <line x1="810" y1="185" x2="810" y2="205"/><line x1="860" y1="185" x2="860" y2="205"/>
+      </g>
+      <!-- locomotive body -->
+      <g id="locomotive">
+        <rect x="150" y="90" width="220" height="70" rx="8" fill="#2f2417"/>
+        <rect x="130" y="120" width="40" height="40" rx="6" fill="#241a10"/>
+        <circle cx="150" cy="60" r="34" fill="#241a10"/>
+        <rect x="185" y="60" width="150" height="34" fill="#3a2c19"/>
+        <rect x="200" y="40" width="26" height="24" fill="#1c140b"/>
+        <circle cx="180" cy="170" r="22" fill="#14100a"/>
+        <circle cx="240" cy="170" r="22" fill="#14100a"/>
+        <circle cx="300" cy="170" r="22" fill="#14100a"/>
+        <circle cx="180" cy="170" r="7" fill="#a8823f"/>
+        <circle cx="240" cy="170" r="7" fill="#a8823f"/>
+        <circle cx="300" cy="170" r="7" fill="#a8823f"/>
+        <rect x="150" y="150" width="180" height="6" fill="#a8823f"/>
+      </g>
+      <g class="carriages" id="carriages-svg">
+        <rect x="400" y="100" width="140" height="60" rx="6" fill="#4a3620"/>
+        <rect x="560" y="100" width="140" height="60" rx="6" fill="#4a3620"/>
+        <rect x="720" y="100" width="140" height="60" rx="6" fill="#4a3620"/>
+        <g fill="#e7c98a" opacity=".6">
+          <rect x="420" y="115" width="20" height="20"/><rect x="460" y="115" width="20" height="20"/>
+          <rect x="500" y="115" width="20" height="20"/>
+          <rect x="580" y="115" width="20" height="20"/><rect x="620" y="115" width="20" height="20"/>
+          <rect x="660" y="115" width="20" height="20"/>
+          <rect x="740" y="115" width="20" height="20"/><rect x="780" y="115" width="20" height="20"/>
+          <rect x="820" y="115" width="20" height="20"/>
+        </g>
+        <circle cx="430" cy="170" r="18" fill="#14100a"/><circle cx="510" cy="170" r="18" fill="#14100a"/>
+        <circle cx="590" cy="170" r="18" fill="#14100a"/><circle cx="670" cy="170" r="18" fill="#14100a"/>
+        <circle cx="750" cy="170" r="18" fill="#14100a"/><circle cx="830" cy="170" r="18" fill="#14100a"/>
+      </g>
+    </svg>
+    <div class="hero__steam">
+      <div class="steam-puff"></div><div class="steam-puff"></div>
+      <div class="steam-puff"></div><div class="steam-puff"></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================================================================
+     ENGINE — Introduction
+     =================================================================== -->
+<section class="carriage" id="engine" data-carriage-name="Engine — Introduction">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">The Engine</span>
+      <h2 class="carriage-title">Before we depart</h2>
+      <p class="carriage-lede">A short word about what this journey is, and isn't.</p>
+    </div>
+    <div class="engine-grid">
+      <div class="engine-copy reveal">
+        <p>In August 1947, British India was divided into two independent nations — India and Pakistan — in what became the largest mass migration in recorded history. Somewhere between fourteen and sixteen million people crossed a border that had existed, in most places, for less than a week.</p>
+        <p>This site travels through that history the way so many of its survivors did: by train. Each carriage ahead holds one part of the story — the politics that led here, the timeline of 1947 itself, the migration, and above all, the people who lived it.</p>
+        <p>The novel <em>Train to Pakistan</em> by Khushwant Singh runs alongside this journey as a companion, not a destination. It gives this site its central image — the train as both a vessel of escape and, too often, of tragedy — but the story this site tells is the Partition's own.</p>
+        <p style="color:var(--text-soft); font-size:.95rem;">This is a working prototype. Wherever you see the word <strong>placeholder</strong>, that space is reserved for real testimony, photographs, or recordings to be added with proper consent before public launch.</p>
+      </div>
+      <div class="reveal">
+        <div class="ticket">
+          <div class="ticket__row"><span>NORTHERN RAILWAY</span><span>No. 001947</span></div>
+          <div class="ticket__title">ADMIT ONE — THE LAST JOURNEY</div>
+          <div class="ticket__row"><span>FROM</span><span>Pre-Partition Punjab</span></div>
+          <div class="ticket__row"><span>TO</span><span>Remembrance</span></div>
+          <div class="ticket__row"><span>CARRIAGES</span><span>16</span></div>
+          <div class="ticket__row"><span>FARE</span><span>Your attention</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 1 — What was Partition?
+     =================================================================== -->
+<section class="carriage" id="carriage-1" data-carriage-name="What was Partition?">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage One</span>
+      <h2 class="carriage-title">What was Partition?</h2>
+      <p class="carriage-lede">The short answer, and why it is never quite short enough.</p>
+    </div>
+    <div class="two-col reveal">
+      <div class="paper-card pad">
+        <h3>In one paragraph</h3>
+        <p>On 14–15 August 1947, British India ended almost two centuries of colonial rule and split into two independent dominions: India, with a Hindu-majority population, and Pakistan, created as a homeland for the subcontinent's Muslims and itself divided into two wings a thousand miles apart (West Pakistan and East Pakistan, now Bangladesh). The new international border cut directly through the two provinces with the most religiously mixed populations, Punjab and Bengal, dividing farmland, rivers, cities, and families.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Why it still matters</h3>
+        <p>Partition was not simply a redrawing of a map. It triggered a migration of an estimated 14–16 million people, communal violence that killed anywhere from 200,000 to two million (historians still dispute the number), and the abduction of tens of thousands of women. It shaped two nations' founding identities, and its aftershocks — in family memory, in politics, in the India–Pakistan relationship — continue today.</p>
+      </div>
+    </div>
+    <div class="paper-card pad reveal" style="margin-top:2rem;">
+      <h3>Key facts</h3>
+      <ul>
+        <li><strong>Date:</strong> Independence and Partition took effect at midnight, 14–15 August 1947.</li>
+        <li><strong>Boundary:</strong> Drawn by the Radcliffe Commission, chaired by a British lawyer who had never been to India before his appointment.</li>
+        <li><strong>Two nations:</strong> The Dominion of Pakistan and the Dominion of India (both became republics later — Pakistan in 1956, India in 1950).</li>
+        <li><strong>Two wings:</strong> Pakistan initially comprised West Pakistan and East Pakistan; the latter became independent Bangladesh in 1971.</li>
+        <li><strong>Basis of division:</strong> District-level religious majorities, applied unevenly and under enormous time pressure.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 2 — Interactive Timeline
+     =================================================================== -->
+<section class="carriage" id="carriage-2" data-carriage-name="Timeline">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Two</span>
+      <h2 class="carriage-title">The Line: an interactive timeline</h2>
+      <p class="carriage-lede">Every stop below is a station along the road to, and through, 1947. Select one to open its archive.</p>
+    </div>
+    <div class="timeline-rail reveal">
+      <div class="timeline-track-line" aria-hidden="true"></div>
+      <div class="timeline-scroller" id="timeline-scroller" role="list" aria-label="Timeline of events, 1940 to 1948">
+        <!-- populated by JS -->
+      </div>
+    </div>
+    <div class="paper-card station-detail" id="station-detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 3 — Causes of Partition
+     =================================================================== -->
+<section class="carriage" id="carriage-3" data-carriage-name="Causes of Partition">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Three</span>
+      <h2 class="carriage-title">Causes of Partition</h2>
+      <p class="carriage-lede">No single cause explains 1947. These forces built on one another over four decades.</p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="paper-card pad">
+        <h3>Colonial policy</h3>
+        <p>British administrative practices — including separate electorates for Muslims introduced in 1909 — institutionalised religious identity as the primary category of Indian politics, deepening a divide that colonial rule had also long exploited to govern.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>The two-nation theory</h3>
+        <p>The Muslim League, led by Muhammad Ali Jinnah, argued that Hindus and Muslims constituted two distinct nations that could not fairly share one state — a position formalised in the 1940 Lahore Resolution.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Failed power-sharing</h3>
+        <p>The 1946 Cabinet Mission Plan attempted to keep India united under a loose federal structure. Its collapse, amid mutual distrust between the Congress and the League, removed the last serious alternative to partition.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Direct Action Day</h3>
+        <p>The August 1946 call for "Direct Action" and the killing that followed in Calcutta convinced many leaders, reluctantly, that a shared future was no longer safe to attempt.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>A compressed timeline</h3>
+        <p>Mountbatten's decision to move independence forward by nearly a year gave officials weeks, not months, to plan the transfer of power, security, and population — a compression many historians see as its own cause of the disaster that followed.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>An imperfect boundary</h3>
+        <p>The Radcliffe Line was drawn using outdated maps and incomplete 1941 census data, in five weeks, by a commission that could not visit most of the territory it was dividing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 4 — Migration & Refugee Crisis + Map
+     =================================================================== -->
+<section class="carriage" id="carriage-4" data-carriage-name="Migration and Refugee Crisis">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Four</span>
+      <h2 class="carriage-title">Migration and the refugee crisis</h2>
+      <p class="carriage-lede">A parchment map of the routes people took. Select a region to read what happened there.</p>
+    </div>
+    <div class="map-wrap reveal">
+      <div class="parchment-map">
+        <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified historical map of undivided India in 1947, showing Punjab, Bengal, Sindh and Delhi regions with migration routes">
+          <title>Simplified 1947 map with clickable regions</title>
+          <path class="map-region" data-region="punjab" tabindex="0" role="button" aria-pressed="false" aria-label="Punjab" d="M60,60 L230,50 L260,180 L120,230 L40,170 Z" fill="#c9a86a" stroke="#5c4322" stroke-width="2"/>
+          <path class="map-region" data-region="delhi" tabindex="0" role="button" aria-pressed="false" aria-label="Delhi and border regions" d="M230,180 L300,170 L310,250 L250,260 Z" fill="#d6b978" stroke="#5c4322" stroke-width="2"/>
+          <path class="map-region" data-region="sindh" tabindex="0" role="button" aria-pressed="false" aria-label="Sindh" d="M30,220 L120,240 L140,380 L60,420 L10,330 Z" fill="#bfa15f" stroke="#5c4322" stroke-width="2"/>
+          <path class="map-region" data-region="bengal" tabindex="0" role="button" aria-pressed="false" aria-label="Bengal" d="M430,250 L540,240 L560,360 L470,410 L410,340 Z" fill="#c9a86a" stroke="#5c4322" stroke-width="2"/>
+          <path class="migration-route" d="M150,120 Q200,200 240,220"/>
+          <path class="migration-route" d="M240,220 Q180,260 150,320"/>
+          <path class="migration-route" d="M480,280 Q520,320 500,360"/>
+          <text x="110" y="140" font-family="Special Elite, monospace" font-size="16" fill="#3a2410">Punjab</text>
+          <text x="245" y="215" font-family="Special Elite, monospace" font-size="14" fill="#3a2410">Delhi</text>
+          <text x="55" y="320" font-family="Special Elite, monospace" font-size="16" fill="#3a2410">Sindh</text>
+          <text x="460" y="320" font-family="Special Elite, monospace" font-size="16" fill="#3a2410">Bengal</text>
+        </svg>
+      </div>
+      <div class="paper-card pad map-info" id="map-info">
+        <p class="map-info__placeholder">Select a region on the map to see migration routes, estimated numbers, and what happened there.</p>
+      </div>
+    </div>
+    <div class="paper-card pad reveal" style="margin-top:2rem;">
+      <h3>The scale of it</h3>
+      <p>Refugees moved in "foot columns" (kafilas) that could stretch for eight to ten miles and take days to pass a single point, and aboard trains that became so associated with mass killing that they earned the grim nickname "ghost trains" — arriving at their destination with every passenger dead. Both India and Pakistan established emergency ministries and camps to register, feed, and eventually resettle the displaced, a process that in practice took years, and for some, was never fully completed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 5 — Human Stories + Interview Archive
+     =================================================================== -->
+<section class="carriage" id="carriage-5" data-carriage-name="Human Stories">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Five</span>
+      <h2 class="carriage-title">Human stories</h2>
+      <p class="carriage-lede">Suitcases stacked in the luggage carriage. Open one to read what was carried, and what was left behind.</p>
+    </div>
+    <div class="filter-bar reveal" id="story-filters" role="group" aria-label="Filter stories by theme">
+      <button class="pill-btn" data-filter="all" aria-pressed="true">All</button>
+      <button class="pill-btn" data-filter="India">India</button>
+      <button class="pill-btn" data-filter="Pakistan">Pakistan</button>
+      <button class="pill-btn" data-filter="Punjab">Punjab</button>
+      <button class="pill-btn" data-filter="Bengal">Bengal</button>
+      <button class="pill-btn" data-filter="Children">Children</button>
+      <button class="pill-btn" data-filter="Women">Women</button>
+      <button class="pill-btn" data-filter="Families">Families</button>
+      <button class="pill-btn" data-filter="Migration">Migration</button>
+      <button class="pill-btn" data-filter="Loss">Loss</button>
+      <button class="pill-btn" data-filter="Hope">Hope</button>
+    </div>
+    <div class="luggage-rack reveal" id="luggage-rack"></div>
+
+    <div class="carriage-header" style="margin-top:4rem;">
+      <span class="carriage-kicker">The Interview Archive</span>
+      <h3 class="carriage-title" style="font-size:clamp(1.5rem,3vw,2.1rem);">Recorded voices</h3>
+      <p class="carriage-lede">Oral histories, presented as cassette tapes. This archive is designed to grow — each card below is ready to receive a real recording and transcript.</p>
+    </div>
+    <div class="cassette-shelf reveal" id="cassette-shelf"></div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 6 — Women and Children
+     =================================================================== -->
+<section class="carriage" id="carriage-6" data-carriage-name="Women and Children">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Six</span>
+      <h2 class="carriage-title">Women and children</h2>
+      <p class="carriage-lede">Partition bore down on women and children with particular cruelty, and history has only recently begun to reckon with it fully.</p>
+    </div>
+    <div class="two-col reveal">
+      <div class="paper-card pad">
+        <h3>Abduction and "recovery"</h3>
+        <p>An estimated 75,000 women were abducted across the new border during and after Partition. The Indian and Pakistani governments later ran a joint "recovery" operation to locate and return abducted women to their original families — a process that was itself often experienced as a second uprooting, since many women had, by then, built new lives, families, or simply no longer wished to return to communities that in some cases would not fully accept them back.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Honour and violence</h3>
+        <p>In several documented cases, women were killed by their own male relatives to prevent their capture or conversion by the "other" community — a practice some survivors and historians have since described as a violence born of the same communal logic driving the wider killing, rather than separate from it.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Children in the crossing</h3>
+        <p>Thousands of children were separated from parents in crowded stations and chaotic convoys. Camps and volunteer organisations — many run by women, including the All India Women's Conference — worked for years afterward tracing missing children through registries, newspaper notices, and word of mouth.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>A note on this section</h3>
+        <p>Scholars including Urvashi Butalia (<em>The Other Side of Silence</em>) and Ritu Menon &amp; Kamla Bhasin (<em>Borders and Boundaries</em>) were among the first to centre women's experience of Partition in historical writing, decades after the event. Their work is recommended further reading.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 7 — Religion and Identity
+     =================================================================== -->
+<section class="carriage" id="carriage-7" data-carriage-name="Religion and Identity">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Seven</span>
+      <h2 class="carriage-title">Religion and identity</h2>
+      <p class="carriage-lede">Before 1947, religious identity coexisted, often literally next door, with shared language, food, dress, and daily life.</p>
+    </div>
+    <div class="paper-card pad reveal">
+      <p>In villages like the fictional Mano Majra of <em>Train to Pakistan</em>, Sikh and Muslim families had lived side by side for generations, sharing wells, festivals, and labour. Partition asked people to sort centuries of shared, syncretic life into two boxes — Hindu-Sikh and Muslim — almost overnight, and to treat neighbours as strangers, or worse, on that basis alone.</p>
+      <p>This did not happen everywhere, or evenly. Many individuals sheltered neighbours of another faith at real risk to themselves; entire communities in some regions saw little violence at all. But where fear took hold, it moved fast, often driven less by personal animosity than by rumour, retaliation for violence elsewhere, and the collapse of any authority able to guarantee safety.</p>
+      <blockquote class="quote-block">"The mob had many heads but no head." — a description echoed across numerous survivor accounts of how ordinary people were swept into collective violence they would not have chosen alone.</blockquote>
+      <p>Understanding this is essential to understanding Partition honestly: it was not a war between religions so much as a catastrophic failure of political and administrative processes that then expressed itself through the fault line of religious identity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 8 — Politics and Leaders
+     =================================================================== -->
+<section class="carriage" id="carriage-8" data-carriage-name="Politics and Leaders">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Eight</span>
+      <h2 class="carriage-title">Politics and leaders</h2>
+      <p class="carriage-lede">Presented neutrally: the people whose decisions shaped 1947, without ranking blame.</p>
+    </div>
+    <div class="character-grid reveal">
+      <div class="paper-card character-card pad"><span class="role">Muslim League</span><h4>Muhammad Ali Jinnah</h4><p>Led the Muslim League and became Pakistan's first Governor-General. Argued Muslims required a separate state to protect their political and cultural future.</p></div>
+      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Jawaharlal Nehru</h4><p>Congress leader and India's first Prime Minister, committed to a united, secular India until partition became unavoidable.</p></div>
+      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Mahatma Gandhi</h4><p>Opposed Partition to the end and spent independence day fasting and working against communal violence in Calcutta rather than celebrating in Delhi.</p></div>
+      <div class="paper-card character-card pad"><span class="role">British Crown</span><h4>Lord Louis Mountbatten</h4><p>The last Viceroy of India, tasked with transferring power; accelerated the timetable for independence to August 1947.</p></div>
+      <div class="paper-card character-card pad"><span class="role">Boundary Commission</span><h4>Sir Cyril Radcliffe</h4><p>British barrister with no prior experience of India, given five weeks to draw the Punjab and Bengal boundary lines.</p></div>
+      <div class="paper-card character-card pad"><span class="role">Pakistan Movement</span><h4>Liaquat Ali Khan</h4><p>Jinnah's deputy and Pakistan's first Prime Minister, central to the Muslim League's negotiating position through 1946–47.</p></div>
+      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Sardar Vallabhbhai Patel</h4><p>Congress leader and India's first Deputy Prime Minister, who oversaw the integration of princely states into the new Indian union.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 9 — Culture, Art and Memory (+ Gallery)
+     =================================================================== -->
+<section class="carriage" id="carriage-9" data-carriage-name="Culture, Art and Memory">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Nine</span>
+      <h2 class="carriage-title">Culture, art and memory</h2>
+      <p class="carriage-lede">How Partition has been remembered, painted, written, and preserved in the decades since.</p>
+    </div>
+    <div class="two-col reveal" style="margin-bottom:2.5rem;">
+      <div class="paper-card pad">
+        <h3>Literature and art</h3>
+        <p>Partition produced one of South Asia's richest bodies of literature — Saadat Hasan Manto's unflinching short stories, Amrita Pritam's poetry and <em>Pinjar</em>, Bhisham Sahni's <em>Tamas</em>, Khushwant Singh's <em>Train to Pakistan</em>, and Bapsi Sidhwa's <em>Cracking India</em>, among many others — because fiction could sometimes carry what official history could not yet hold.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Living memorials</h3>
+        <p>The Partition Museum in Amritsar (opened 2017) and the 1947 Partition Archive, a global oral-history project, are two of the most significant efforts to collect survivor testimony directly, while survivors are still alive to give it.</p>
+      </div>
+    </div>
+    <h3 class="reveal" style="text-align:center; margin-bottom:1rem;">The Gallery Wall</h3>
+    <div class="gallery-wall reveal" id="gallery-wall"></div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 10 — Impact on Families
+     =================================================================== -->
+<section class="carriage" id="carriage-10" data-carriage-name="Impact on Families">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Ten</span>
+      <h2 class="carriage-title">Impact on families</h2>
+      <p class="carriage-lede">A single border decision reached into households and rearranged them permanently.</p>
+    </div>
+    <div class="two-col reveal">
+      <div class="paper-card pad">
+        <h3>Severed extended families</h3>
+        <p>Joint family structures common across pre-Partition Punjab and Bengal were frequently split by the border itself, with siblings, parents, and grandparents ending up as citizens of different countries — sometimes only a few miles, but a closed border, apart.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Names, papers, and property</h3>
+        <p>Families arrived with whatever documents they could carry, if any. Refugee registration became the basis for claims to compensation and resettled property — a bureaucratic process that could take years and rarely restored what had been lost.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Generational memory</h3>
+        <p>Many families who lived through Partition spoke about it rarely, if at all, to their children — a documented pattern of protective silence that later generations, including today's descendants, are now actively working to recover through oral history projects.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Reunions, decades later</h3>
+        <p>Since India and Pakistan eased some travel and, more recently, opened cross-border correspondence via social media, numerous families have found and visited relatives, or the homes their families left, after seventy or more years apart.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 11 — Economic and Social Impact (Statistics)
+     =================================================================== -->
+<section class="carriage" id="carriage-11" data-carriage-name="Economic and Social Impact">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Eleven</span>
+      <h2 class="carriage-title">Economic and social impact</h2>
+      <p class="carriage-lede">Numbers, presented the way this journey prefers to present them: as luggage tags, not spreadsheets.</p>
+    </div>
+    <div class="stats-grid reveal" id="stats-grid"></div>
+    <div class="paper-card pad reveal" style="margin-top:2rem;">
+      <h3>Divided industries</h3>
+      <p>Punjab's canal-irrigated farmland — among the most productive in the subcontinent — was split by a border that ignored irrigation networks, creating water disputes that echo into modern India–Pakistan relations. Bengal's jute industry was similarly divided: most jute-growing land fell to East Pakistan, while most jute mills remained in Calcutta, India — severing raw material from processing capacity overnight.</p>
+    </div>
+    <div class="destination-board reveal" style="margin-top:2rem;">
+      <div class="destination-board__row"><span>PLATFORM</span><span>DEPARTURE</span><span>NOW ARRIVING</span></div>
+      <div class="destination-board__row"><span>Lahore</span><span>On time</span><span>Amritsar</span></div>
+      <div class="destination-board__row"><span>Karachi</span><span>Delayed</span><span>Bombay (by sea)</span></div>
+      <div class="destination-board__row"><span>Dhaka</span><span>On time</span><span>Kolkata</span></div>
+      <div class="destination-board__row"><span>Rawalpindi</span><span>Cancelled</span><span>—</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 12 — Media Representation (Film Shelf)
+     =================================================================== -->
+<section class="carriage" id="carriage-12" data-carriage-name="Media Representation">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Twelve</span>
+      <h2 class="carriage-title">Media representation</h2>
+      <p class="carriage-lede">Film, documentary, and print have each shaped public memory of Partition differently. Spin a reel to read more.</p>
+    </div>
+    <div class="film-tabs reveal" id="film-tabs" role="group" aria-label="Filter films by perspective">
+      <button class="pill-btn" data-lens="all" aria-pressed="true">All</button>
+      <button class="pill-btn" data-lens="india">Indian perspectives</button>
+      <button class="pill-btn" data-lens="pakistan">Pakistani perspectives</button>
+      <button class="pill-btn" data-lens="balanced">More balanced portrayals</button>
+    </div>
+    <div class="film-shelf reveal" id="film-shelf"></div>
+    <div class="paper-card pad reveal" style="margin-top:2.5rem;">
+      <h3>How memory gets shaped</h3>
+      <p>Popular cinema in both countries has, at times, leaned toward nationalist framing — casting the "other" side as primarily responsible for violence. More restrained works, including <em>Train to Pakistan</em> itself, tend to distribute moral weight across communities and blame the collapse of order and leadership more than any one group. Newspapers of the period were themselves partisan instruments: many English and vernacular papers in 1947 openly took communal sides, complicating their value as neutral historical sources and reminding modern readers to weigh period reporting carefully.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 13 — Train to Pakistan (Literature)
+     =================================================================== -->
+<section class="carriage" id="carriage-13" data-carriage-name="Train to Pakistan">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Thirteen</span>
+      <h2 class="carriage-title">Train to Pakistan</h2>
+      <p class="carriage-lede">The novel that lends this site its central image, examined on its own terms.</p>
+    </div>
+    <div class="book-hero reveal">
+      <div class="book-cover">
+        <h3>Train to Pakistan</h3>
+        <p style="opacity:.85;">Khushwant Singh, 1956</p>
+      </div>
+      <div>
+        <p>Set almost entirely within the fictional border village of Mano Majra, on the banks of the Sutlej, <em>Train to Pakistan</em> was one of the first major novels in English to confront Partition directly, only nine years after it happened. It refuses easy heroes: violence here is committed and resisted by ordinary people of every community, and the novel's moral centre — the small-time criminal Juggut Singh — is redeemed by love and courage, not ideology.</p>
+        <p>Rather than dramatising politicians and boundary commissions, the novel stays at ground level, in a single village, and asks what Partition actually required of an ordinary person the moment it arrived at their door.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:2.5rem;">
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Plot &amp; setting <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>Mano Majra is a small village where Sikhs and Muslims have lived together for generations, its rhythms set by the trains that pass through daily. When a ghost train arrives carrying only corpses, and a moneylender is murdered the same night, suspicion and fear take hold — testing every relationship the village had taken for granted.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Key characters <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>
+          <div class="character-grid">
+            <div class="character-card"><h4>Juggut Singh</h4><p class="role">"Jugga"</p><p>A Sikh badmash (small-time criminal) in love with a Muslim woman, Nooran; his final act of sacrifice is the novel's moral climax.</p></div>
+            <div class="character-card"><h4>Nooran</h4><p class="role">Imam Baksh's daughter</p><p>A young Muslim woman whose relationship with Jugga crosses the line Partition is about to draw in blood.</p></div>
+            <div class="character-card"><h4>Iqbal Singh</h4><p class="role">The outside idealist</p><p>A city-educated social worker whose political theorising proves nearly useless against the village's real crisis.</p></div>
+            <div class="character-card"><h4>Hukum Chand</h4><p class="role">The magistrate</p><p>A weary, morally compromised local official who nonetheless intervenes at a decisive moment.</p></div>
+            <div class="character-card"><h4>Imam Baksh</h4><p class="role">The village weaver</p><p>Respected Muslim elder forced, like his neighbours, to leave the only home he has known.</p></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Themes &amp; symbolism <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>The train itself is the novel's central symbol — normally a sign of connection and modern progress, it becomes, in the "ghost trains," an instrument of atrocity. Water (the Sutlej river, the village well) recurs as a symbol of shared life that violence cannot fully sever. The novel's structure — spending most of its length on ordinary village routine before violence arrives — insists that Partition happened to ordinary life, not around it.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Why trains matter <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>Trains carried refugees to safety and, in the same season, carried the murdered as gruesome cargo. No single image captures Partition's whiplash between hope and horror as precisely — which is why this entire website borrows the train as its structuring idea.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Historical accuracy <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>Mano Majra is fictional, but Khushwant Singh drew on his own experience: he practised law in Lahore until 1947 and witnessed Partition violence firsthand before migrating to India. Historians generally regard the novel's depiction of communal breakdown, refugee trains, and administrative helplessness as an accurate, well-observed composite of real events, even though its specific plot is invented.</div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Famous quotations <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>
+          <blockquote class="quote-block">"Muslims said the Hindus had planned and started the killing. According to the Hindus, the Muslims were to blame. The fact is, both sides killed. Both shot and stabbed and speared and clubbed. Both tortured. Both raped."</blockquote>
+          <blockquote class="quote-block">"The wogs... had been at each other's throats for years. Now they had begun killing each other."</blockquote>
+          <p style="font-size:.85rem; color:var(--text-soft);">Quoted for educational and critical discussion purposes.</p>
+        </div></div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">Reading recommendations <span aria-hidden="true">+</span></button>
+        <div class="accordion-panel"><div>Pair <em>Train to Pakistan</em> with Saadat Hasan Manto's short stories (especially <em>Toba Tek Singh</em>), Bhisham Sahni's <em>Tamas</em>, Bapsi Sidhwa's <em>Cracking India</em>, and Urvashi Butalia's non-fiction <em>The Other Side of Silence</em> for a fuller picture across fiction and testimony.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CARRIAGE 14 — Legacy Today
+     =================================================================== -->
+<section class="carriage" id="carriage-14" data-carriage-name="Legacy Today">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">Carriage Fourteen</span>
+      <h2 class="carriage-title">Legacy today</h2>
+      <p class="carriage-lede">Partition is not a closed chapter. It is a living inheritance, still being written.</p>
+    </div>
+    <div class="two-col reveal">
+      <div class="paper-card pad">
+        <h3>Institutions of memory</h3>
+        <p>The Partition Museum in Amritsar and the 1947 Partition Archive are racing against time to record survivor testimony while the generation that lived through 1947 is still with us — most survivors are now in their nineties or older.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>The border today</h3>
+        <p>The Wagah–Attari border crossing between Lahore and Amritsar remains one of the few official land crossings, its daily flag-lowering ceremony drawing visitors from both countries who gather, separated by a gate, to watch essentially the same ritual performed in mirror image.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Diaspora memory</h3>
+        <p>Partition also shaped South Asian diaspora communities worldwide, many of whom carry family memory of migration a second or third time removed, and who have become active contributors to oral history and archival projects.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Why this still matters to students</h3>
+        <p>Understanding Partition helps explain contemporary India–Pakistan relations, the politics of Kashmir, and broader patterns of how nations are made and unmade — but its most durable lesson may simply be how ordinary people behave, for better and worse, when the ground shifts beneath them without warning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FINAL CARRIAGE — Reflection
+     =================================================================== -->
+<section class="carriage" id="final" data-carriage-name="Reflection">
+  <div class="container">
+    <div class="carriage-header">
+      <span class="carriage-kicker">The Final Carriage</span>
+      <h2 class="carriage-title">Reflection</h2>
+      <p class="carriage-lede">The journey ends here, but the story doesn't. Leave a thought for those who travel this line after you.</p>
+    </div>
+
+    <form class="reflection-form reveal" id="reflection-form">
+      <label for="reflection-question">Choose a question</label>
+      <select id="reflection-question">
+        <option>What story stayed with you?</option>
+        <option>What does home mean to you?</option>
+      </select>
+      <label for="reflection-text">Your reflection (shared anonymously)</label>
+      <textarea id="reflection-text" rows="3" maxlength="300" required placeholder="Write a few honest sentences…"></textarea>
+      <button class="btn" type="submit">Pin it to the wall</button>
+    </form>
+
+    <div class="reflection-wall reveal" id="reflection-wall"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="finale">
+  <div class="finale__lamp" aria-hidden="true">🏮</div>
+  <h2 style="color:var(--cream);">Thank you for travelling this line.</h2>
+  <p style="max-width:60ch; margin:0 auto;">The Last Journey is a work in progress, built as an educational prototype. If you are a survivor, a descendant, or an archivist who would like to contribute a real story, photograph, or recording, this space is built to hold it with care.</p>
+  <p class="finale__note">Historical content in this prototype draws on widely available public scholarship on Partition and on Khushwant Singh's <em>Train to Pakistan</em>. Figures are commonly cited estimates; historians continue to debate exact numbers. This is a student/educational prototype and not a substitute for primary historical research.</p>
+</footer>
+
+<!-- Generic modal (stories / interviews / films / info) -->
+<div class="modal-scrim" id="modal-scrim" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="modal" id="modal-body">
+    <button class="modal__close" id="modal-close" aria-label="Close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- Gallery lightbox -->
+<figure class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close image">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <figcaption id="lightbox-caption"></figcaption>
+</figure>
+
+<script src="js/content.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
