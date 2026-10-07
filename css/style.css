@@ -607,6 +607,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-vis
   text-align:center; padding: 1.5rem; box-shadow: 0 16px 30px var(--shadow);
 }
 .book-cover h3{ font-size: 1.6rem; }
+.book-cover.has-photo{ background-size: cover; background-position: center; }
+.book-cover.has-photo h3, .book-cover.has-photo p{ text-shadow: 0 2px 6px rgba(0,0,0,.8); }
 .accordion-item{ border-bottom: 1px solid var(--border-color); }
 .accordion-trigger{
   width: 100%; text-align: left; background: none; border: none; cursor: pointer;
@@ -716,4 +718,107 @@ footer.finale a{ color: var(--brass-light); }
 @media (max-width: 640px){
   .carriage{ padding: 4rem 0 3rem; }
   .route-bar__brand{ display: none; }
+}
+
+/* ==========================================================================
+   THE EXPERIENCE LAYER — atmosphere, HUD, cursor, tilt, numerals, magnetism
+   ========================================================================== */
+
+/* Scroll-driven atmosphere: a window-frame vignette (top trim + side rails)
+   that shifts colour with the journey, from dawn calm through unrest and
+   migration to dusk remembrance — deliberately kept to the frame, never
+   the reading area, so body text contrast never depends on the mood. */
+.atmosphere{
+  position: fixed; inset: 0; z-index: 150;
+  pointer-events: none;
+  opacity: .8;
+  transition: opacity 400ms ease;
+  background:
+    linear-gradient(180deg, var(--mood-top, #8a6a3a), transparent 5px),
+    linear-gradient(90deg, var(--mood-top, #8a6a3a) 0, transparent 9px, transparent calc(100% - 9px), var(--mood-bottom, #241a10) 100%);
+}
+:root[data-contrast="high"] .atmosphere{ display: none; }
+@media (max-width: 640px){ .atmosphere{ opacity: .6; } }
+
+/* Big faint station numerals behind each carriage header */
+.carriage-header{ position: relative; z-index: 1; }
+.carriage-num{
+  position: absolute; top: -2.2rem; left: 50%; transform: translateX(-50%);
+  font-family: var(--font-display); font-weight: 900; font-size: clamp(5rem, 14vw, 10rem);
+  color: var(--ink); opacity: .05; letter-spacing: -.04em; z-index: -1;
+  pointer-events: none; user-select: none; line-height: 1;
+}
+
+/* Journey HUD — a small live readout, like a depth gauge for the train line */
+.journey-hud{
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 300;
+  background: rgba(27,20,11,.82); color: var(--cream);
+  border: 1px solid rgba(203,168,94,.4); border-radius: 999px;
+  padding: .5em 1em; display: flex; align-items: center; gap: .7em;
+  font-family: var(--font-stamp); font-size: .72rem; letter-spacing: .03em;
+  backdrop-filter: blur(4px);
+  opacity: 0; transform: translateY(8px); transition: opacity 600ms ease, transform 600ms ease;
+  pointer-events: none;
+}
+.journey-hud.is-visible{ opacity: 1; transform: translateY(0); }
+.journey-hud__dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--brass-light); animation: hud-pulse 1.8s ease-in-out infinite; flex: none; }
+@keyframes hud-pulse{ 0%,100%{ opacity: .4; } 50%{ opacity: 1; } }
+.journey-hud__carriage{ color: var(--brass-light); white-space: nowrap; max-width: 34vw; overflow: hidden; text-overflow: ellipsis; }
+.journey-hud__sep{ opacity: .4; }
+.journey-hud__mood{ font-style: italic; white-space: nowrap; }
+@media (max-width: 640px){
+  .journey-hud{ left: .6rem; right: .6rem; bottom: .6rem; font-size: .64rem; justify-content: space-between; }
+  .journey-hud__mood{ display: none; }
+}
+
+/* Trailing cursor ring (desktop, fine pointers only — added by JS so no FOUC) */
+.cursor-ring{
+  position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--brass-light); z-index: 2000; pointer-events: none;
+  transform: translate3d(-50%,-50%,0); transition: width 200ms ease, height 200ms ease, border-color 200ms ease, opacity 200ms ease;
+  mix-blend-mode: difference; opacity: .8;
+}
+.cursor-ring.is-active{ width: 46px; height: 46px; border-color: var(--rust); background: rgba(138,59,35,.15); }
+.cursor-ring.is-hidden{ opacity: 0; }
+
+/* Tilt-on-hover cards */
+.tilt-card, .paper-card, .gallery-frame, .luggage-tag{ transition: transform 350ms cubic-bezier(.2,.8,.2,1); will-change: transform; transform-style: preserve-3d; }
+
+/* Leader / figure portrait media (Wikipedia-sourced, progressively enhanced) */
+.figure-media{
+  width: 84px; height: 84px; border-radius: 50%; overflow: hidden; margin: 0 auto 1rem;
+  border: 3px solid var(--brass); box-shadow: 0 4px 10px var(--shadow);
+  background: linear-gradient(160deg, var(--brass), var(--rust-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--cream);
+  flex: none;
+}
+.figure-media img{ width: 100%; height: 100%; object-fit: cover; filter: sepia(.35) contrast(1.05); }
+.character-card.has-photo{ text-align: center; }
+.figure-credit{
+  display: block; font-family: var(--font-stamp); font-size: .65rem; color: var(--text-soft);
+  margin-top: .6rem; text-decoration: none; opacity: .8;
+}
+.figure-credit:hover{ opacity: 1; text-decoration: underline; }
+
+/* Wide research-photo card (museum, border, book, map) */
+.research-figure{ text-align: center; }
+.research-figure__frame{
+  width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-sm); overflow: hidden;
+  background: linear-gradient(160deg, var(--parchment-darker), var(--brass));
+  display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+}
+.research-figure__frame img{ width: 100%; height: 100%; object-fit: cover; filter: sepia(.3) contrast(1.05); }
+.research-figure__frame .figure-fallback{ font-family: var(--font-stamp); font-size: .75rem; color: var(--ink-soft); padding: 1rem; text-align: center; }
+
+/* Count-up pulse */
+.luggage-tag__value.is-counted{ animation: tag-settle 420ms ease; }
+@keyframes tag-settle{ 0%{ transform: scale(1.12); color: var(--brass-light); } 100%{ transform: scale(1); } }
+
+/* Magnetic buttons get a little extra lift room */
+.board-btn, .magnetic{ will-change: transform; }
+
+@media (hover:none){
+  .cursor-ring{ display: none; }
 }

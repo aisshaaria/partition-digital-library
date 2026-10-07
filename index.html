@@ -11,12 +11,26 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<!-- Scroll-driven atmosphere: one continuous sky behind the whole journey -->
+<div class="atmosphere" id="atmosphere" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Scroll progress: a small train riding the rails of the page -->
 <div class="progress-track" aria-hidden="true">
   <div class="progress-track__fill" id="progress-fill"></div>
   <div class="progress-track__engine" id="progress-engine">🚂</div>
+</div>
+
+<!-- Journey HUD: a live readout, like a depth gauge for the train line -->
+<div class="journey-hud" id="journey-hud" aria-hidden="true">
+  <span class="journey-hud__dot"></span>
+  <span class="journey-hud__carriage" id="hud-carriage">Platform One</span>
+  <span class="journey-hud__sep">·</span>
+  <span id="hud-distance">0 km</span>
+  <span class="journey-hud__sep">·</span>
+  <span class="journey-hud__mood" id="hud-mood">Peaceful</span>
 </div>
 
 <div class="whistle-caption" id="whistle-caption" role="status" aria-live="polite">Whistle blows — changing carriage</div>
@@ -92,7 +106,7 @@
     <span class="hero__eyebrow">Platform One · Pre-Partition Punjab · Dawn</span>
     <h1 class="hero__title">The Last Journey</h1>
     <p class="hero__subtitle">Stories of the 1947 India–Pakistan Partition</p>
-    <button class="board-btn" id="board-train-btn">Board the Train</button>
+    <button class="board-btn magnetic" id="board-train-btn">Board the Train</button>
     <p class="hero__hint">A slow, respectful journey. Best experienced with sound on. Headphones recommended.</p>
   </div>
 
@@ -159,6 +173,7 @@
 <section class="carriage" id="engine" data-carriage-name="Engine — Introduction">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">00</span>
       <span class="carriage-kicker">The Engine</span>
       <h2 class="carriage-title">Before we depart</h2>
       <p class="carriage-lede">A short word about what this journey is, and isn't.</p>
@@ -190,6 +205,7 @@
 <section class="carriage" id="carriage-1" data-carriage-name="What was Partition?">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">01</span>
       <span class="carriage-kicker">Carriage One</span>
       <h2 class="carriage-title">What was Partition?</h2>
       <p class="carriage-lede">The short answer, and why it is never quite short enough.</p>
@@ -204,15 +220,21 @@
         <p>Partition was not simply a redrawing of a map. It triggered a migration of an estimated 14–16 million people, communal violence that killed anywhere from 200,000 to two million (historians still dispute the number), and the abduction of tens of thousands of women. It shaped two nations' founding identities, and its aftershocks — in family memory, in politics, in the India–Pakistan relationship — continue today.</p>
       </div>
     </div>
-    <div class="paper-card pad reveal" style="margin-top:2rem;">
-      <h3>Key facts</h3>
-      <ul>
-        <li><strong>Date:</strong> Independence and Partition took effect at midnight, 14–15 August 1947.</li>
-        <li><strong>Boundary:</strong> Drawn by the Radcliffe Commission, chaired by a British lawyer who had never been to India before his appointment.</li>
-        <li><strong>Two nations:</strong> The Dominion of Pakistan and the Dominion of India (both became republics later — Pakistan in 1956, India in 1950).</li>
-        <li><strong>Two wings:</strong> Pakistan initially comprised West Pakistan and East Pakistan; the latter became independent Bangladesh in 1971.</li>
-        <li><strong>Basis of division:</strong> District-level religious majorities, applied unevenly and under enormous time pressure.</li>
-      </ul>
+    <div class="two-col reveal" style="margin-top:2rem; align-items:start;">
+      <div class="paper-card pad research-figure" data-wiki-title="Radcliffe Line">
+        <div class="research-figure__frame" data-figure><span class="figure-fallback">Radcliffe Line map<br><span class="figure-loading">loading from Wikipedia…</span></span></div>
+        <p style="font-size:.85rem; color:var(--text-soft);">The boundary that divided Punjab and Bengal, drawn in five weeks by a commission that had never visited most of the territory.</p>
+      </div>
+      <div class="paper-card pad">
+        <h3>Key facts</h3>
+        <ul>
+          <li><strong>Date:</strong> Independence and Partition took effect at midnight, 14–15 August 1947.</li>
+          <li><strong>Boundary:</strong> Drawn by the Radcliffe Commission, chaired by a British lawyer who had never been to India before his appointment.</li>
+          <li><strong>Two nations:</strong> The Dominion of Pakistan and the Dominion of India (both became republics later — Pakistan in 1956, India in 1950).</li>
+          <li><strong>Two wings:</strong> Pakistan initially comprised West Pakistan and East Pakistan; the latter became independent Bangladesh in 1971.</li>
+          <li><strong>Basis of division:</strong> District-level religious majorities, applied unevenly and under enormous time pressure.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -223,6 +245,7 @@
 <section class="carriage" id="carriage-2" data-carriage-name="Timeline">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">02</span>
       <span class="carriage-kicker">Carriage Two</span>
       <h2 class="carriage-title">The Line: an interactive timeline</h2>
       <p class="carriage-lede">Every stop below is a station along the road to, and through, 1947. Select one to open its archive.</p>
@@ -243,6 +266,7 @@
 <section class="carriage" id="carriage-3" data-carriage-name="Causes of Partition">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">03</span>
       <span class="carriage-kicker">Carriage Three</span>
       <h2 class="carriage-title">Causes of Partition</h2>
       <p class="carriage-lede">No single cause explains 1947. These forces built on one another over four decades.</p>
@@ -282,6 +306,7 @@
 <section class="carriage" id="carriage-4" data-carriage-name="Migration and Refugee Crisis">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">04</span>
       <span class="carriage-kicker">Carriage Four</span>
       <h2 class="carriage-title">Migration and the refugee crisis</h2>
       <p class="carriage-lede">A parchment map of the routes people took. Select a region to read what happened there.</p>
@@ -320,6 +345,7 @@
 <section class="carriage" id="carriage-5" data-carriage-name="Human Stories">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">05</span>
       <span class="carriage-kicker">Carriage Five</span>
       <h2 class="carriage-title">Human stories</h2>
       <p class="carriage-lede">Suitcases stacked in the luggage carriage. Open one to read what was carried, and what was left behind.</p>
@@ -354,6 +380,7 @@
 <section class="carriage" id="carriage-6" data-carriage-name="Women and Children">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">06</span>
       <span class="carriage-kicker">Carriage Six</span>
       <h2 class="carriage-title">Women and children</h2>
       <p class="carriage-lede">Partition bore down on women and children with particular cruelty, and history has only recently begun to reckon with it fully.</p>
@@ -385,6 +412,7 @@
 <section class="carriage" id="carriage-7" data-carriage-name="Religion and Identity">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">07</span>
       <span class="carriage-kicker">Carriage Seven</span>
       <h2 class="carriage-title">Religion and identity</h2>
       <p class="carriage-lede">Before 1947, religious identity coexisted, often literally next door, with shared language, food, dress, and daily life.</p>
@@ -404,18 +432,19 @@
 <section class="carriage" id="carriage-8" data-carriage-name="Politics and Leaders">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">08</span>
       <span class="carriage-kicker">Carriage Eight</span>
       <h2 class="carriage-title">Politics and leaders</h2>
       <p class="carriage-lede">Presented neutrally: the people whose decisions shaped 1947, without ranking blame.</p>
     </div>
-    <div class="character-grid reveal">
-      <div class="paper-card character-card pad"><span class="role">Muslim League</span><h4>Muhammad Ali Jinnah</h4><p>Led the Muslim League and became Pakistan's first Governor-General. Argued Muslims required a separate state to protect their political and cultural future.</p></div>
-      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Jawaharlal Nehru</h4><p>Congress leader and India's first Prime Minister, committed to a united, secular India until partition became unavoidable.</p></div>
-      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Mahatma Gandhi</h4><p>Opposed Partition to the end and spent independence day fasting and working against communal violence in Calcutta rather than celebrating in Delhi.</p></div>
-      <div class="paper-card character-card pad"><span class="role">British Crown</span><h4>Lord Louis Mountbatten</h4><p>The last Viceroy of India, tasked with transferring power; accelerated the timetable for independence to August 1947.</p></div>
-      <div class="paper-card character-card pad"><span class="role">Boundary Commission</span><h4>Sir Cyril Radcliffe</h4><p>British barrister with no prior experience of India, given five weeks to draw the Punjab and Bengal boundary lines.</p></div>
-      <div class="paper-card character-card pad"><span class="role">Pakistan Movement</span><h4>Liaquat Ali Khan</h4><p>Jinnah's deputy and Pakistan's first Prime Minister, central to the Muslim League's negotiating position through 1946–47.</p></div>
-      <div class="paper-card character-card pad"><span class="role">Indian National Congress</span><h4>Sardar Vallabhbhai Patel</h4><p>Congress leader and India's first Deputy Prime Minister, who oversaw the integration of princely states into the new Indian union.</p></div>
+    <div class="character-grid reveal" id="leaders-grid">
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Muhammad Ali Jinnah"><div class="figure-media" data-figure>MAJ</div><span class="role">Muslim League</span><h4>Muhammad Ali Jinnah</h4><p>Led the Muslim League and became Pakistan's first Governor-General. Argued Muslims required a separate state to protect their political and cultural future.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Jawaharlal Nehru"><div class="figure-media" data-figure>JN</div><span class="role">Indian National Congress</span><h4>Jawaharlal Nehru</h4><p>Congress leader and India's first Prime Minister, committed to a united, secular India until partition became unavoidable.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Mahatma Gandhi"><div class="figure-media" data-figure>MG</div><span class="role">Indian National Congress</span><h4>Mahatma Gandhi</h4><p>Opposed Partition to the end and spent independence day fasting and working against communal violence in Calcutta rather than celebrating in Delhi.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Louis Mountbatten, 1st Earl Mountbatten of Burma"><div class="figure-media" data-figure>LM</div><span class="role">British Crown</span><h4>Lord Louis Mountbatten</h4><p>The last Viceroy of India, tasked with transferring power; accelerated the timetable for independence to August 1947.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Cyril Radcliffe, 1st Viscount Radcliffe"><div class="figure-media" data-figure>CR</div><span class="role">Boundary Commission</span><h4>Sir Cyril Radcliffe</h4><p>British barrister with no prior experience of India, given five weeks to draw the Punjab and Bengal boundary lines.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Liaquat Ali Khan"><div class="figure-media" data-figure>LAK</div><span class="role">Pakistan Movement</span><h4>Liaquat Ali Khan</h4><p>Jinnah's deputy and Pakistan's first Prime Minister, central to the Muslim League's negotiating position through 1946–47.</p></div>
+      <div class="paper-card character-card tilt-card pad has-photo" data-wiki-title="Vallabhbhai Patel"><div class="figure-media" data-figure>VP</div><span class="role">Indian National Congress</span><h4>Sardar Vallabhbhai Patel</h4><p>Congress leader and India's first Deputy Prime Minister, who oversaw the integration of princely states into the new Indian union.</p></div>
     </div>
   </div>
 </section>
@@ -426,6 +455,7 @@
 <section class="carriage" id="carriage-9" data-carriage-name="Culture, Art and Memory">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">09</span>
       <span class="carriage-kicker">Carriage Nine</span>
       <h2 class="carriage-title">Culture, art and memory</h2>
       <p class="carriage-lede">How Partition has been remembered, painted, written, and preserved in the decades since.</p>
@@ -451,6 +481,7 @@
 <section class="carriage" id="carriage-10" data-carriage-name="Impact on Families">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">10</span>
       <span class="carriage-kicker">Carriage Ten</span>
       <h2 class="carriage-title">Impact on families</h2>
       <p class="carriage-lede">A single border decision reached into households and rearranged them permanently.</p>
@@ -482,6 +513,7 @@
 <section class="carriage" id="carriage-11" data-carriage-name="Economic and Social Impact">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">11</span>
       <span class="carriage-kicker">Carriage Eleven</span>
       <h2 class="carriage-title">Economic and social impact</h2>
       <p class="carriage-lede">Numbers, presented the way this journey prefers to present them: as luggage tags, not spreadsheets.</p>
@@ -507,6 +539,7 @@
 <section class="carriage" id="carriage-12" data-carriage-name="Media Representation">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">12</span>
       <span class="carriage-kicker">Carriage Twelve</span>
       <h2 class="carriage-title">Media representation</h2>
       <p class="carriage-lede">Film, documentary, and print have each shaped public memory of Partition differently. Spin a reel to read more.</p>
@@ -531,12 +564,13 @@
 <section class="carriage" id="carriage-13" data-carriage-name="Train to Pakistan">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">13</span>
       <span class="carriage-kicker">Carriage Thirteen</span>
       <h2 class="carriage-title">Train to Pakistan</h2>
       <p class="carriage-lede">The novel that lends this site its central image, examined on its own terms.</p>
     </div>
     <div class="book-hero reveal">
-      <div class="book-cover">
+      <div class="book-cover" data-wiki-title="Train to Pakistan (novel)" data-figure>
         <h3>Train to Pakistan</h3>
         <p style="opacity:.85;">Khushwant Singh, 1956</p>
       </div>
@@ -573,7 +607,12 @@
       </div>
       <div class="accordion-item">
         <button class="accordion-trigger" aria-expanded="false">Historical accuracy <span aria-hidden="true">+</span></button>
-        <div class="accordion-panel"><div>Mano Majra is fictional, but Khushwant Singh drew on his own experience: he practised law in Lahore until 1947 and witnessed Partition violence firsthand before migrating to India. Historians generally regard the novel's depiction of communal breakdown, refugee trains, and administrative helplessness as an accurate, well-observed composite of real events, even though its specific plot is invented.</div></div>
+        <div class="accordion-panel"><div>
+          <div style="display:flex; gap:1.2rem; align-items:flex-start; flex-wrap:wrap;">
+            <div class="figure-media" data-wiki-title="Khushwant Singh" data-figure style="margin:0;">KS</div>
+            <p style="flex:1; min-width:220px; margin:0;">Mano Majra is fictional, but Khushwant Singh drew on his own experience: he practised law in Lahore until 1947 and witnessed Partition violence firsthand before migrating to India. Historians generally regard the novel's depiction of communal breakdown, refugee trains, and administrative helplessness as an accurate, well-observed composite of real events, even though its specific plot is invented.</p>
+          </div>
+        </div></div>
       </div>
       <div class="accordion-item">
         <button class="accordion-trigger" aria-expanded="false">Famous quotations <span aria-hidden="true">+</span></button>
@@ -597,16 +636,19 @@
 <section class="carriage" id="carriage-14" data-carriage-name="Legacy Today">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">14</span>
       <span class="carriage-kicker">Carriage Fourteen</span>
       <h2 class="carriage-title">Legacy today</h2>
       <p class="carriage-lede">Partition is not a closed chapter. It is a living inheritance, still being written.</p>
     </div>
     <div class="two-col reveal">
-      <div class="paper-card pad">
+      <div class="paper-card pad research-figure" data-wiki-title="Partition Museum, Amritsar">
+        <div class="research-figure__frame" data-figure><span class="figure-fallback">Partition Museum, Amritsar<br><span class="figure-loading">loading from Wikipedia…</span></span></div>
         <h3>Institutions of memory</h3>
         <p>The Partition Museum in Amritsar and the 1947 Partition Archive are racing against time to record survivor testimony while the generation that lived through 1947 is still with us — most survivors are now in their nineties or older.</p>
       </div>
-      <div class="paper-card pad">
+      <div class="paper-card pad research-figure" data-wiki-title="Wagah border">
+        <div class="research-figure__frame" data-figure><span class="figure-fallback">Wagah–Attari border<br><span class="figure-loading">loading from Wikipedia…</span></span></div>
         <h3>The border today</h3>
         <p>The Wagah–Attari border crossing between Lahore and Amritsar remains one of the few official land crossings, its daily flag-lowering ceremony drawing visitors from both countries who gather, separated by a gate, to watch essentially the same ritual performed in mirror image.</p>
       </div>
@@ -628,6 +670,7 @@
 <section class="carriage" id="final" data-carriage-name="Reflection">
   <div class="container">
     <div class="carriage-header">
+      <span class="carriage-num" aria-hidden="true">15</span>
       <span class="carriage-kicker">The Final Carriage</span>
       <h2 class="carriage-title">Reflection</h2>
       <p class="carriage-lede">The journey ends here, but the story doesn't. Leave a thought for those who travel this line after you.</p>
@@ -674,5 +717,6 @@
 
 <script src="js/content.js"></script>
 <script src="js/main.js"></script>
+<script src="js/experience.js"></script>
 </body>
 </html>
