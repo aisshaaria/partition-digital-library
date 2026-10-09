@@ -351,6 +351,9 @@
     timelineScroller.appendChild(btn);
   });
   function showStation(ev, { scroll } = { scroll: true }) {
+    const photoBlock = ev.wikiTitle
+      ? `<div data-wiki-title="${ev.wikiTitle}"><div class="research-figure__frame" data-figure><span class="figure-fallback">${ev.name}<br><span class="figure-loading">loading from Wikipedia…</span></span></div></div>`
+      : "";
     stationDetail.innerHTML = `
       <span class="station-detail__meta">${ev.date}</span>
       <h3>${ev.name}</h3>
@@ -360,12 +363,13 @@
           ${ev.quote ? `<blockquote class="quote-block">${ev.quote}<br><small>${ev.quoteSource}</small></blockquote>` : ""}
         </div>
         <div>
-          <div class="modal__photo" role="img" aria-label="Archival photograph placeholder for ${ev.name}">Photograph placeholder<br>— archival image to be added</div>
+          ${photoBlock}
           <div>${ev.tags.map(t => `<span class="archive-chip">${t}</span>`).join("")}</div>
         </div>
       </div>
     `;
     stationDetail.classList.add("is-open");
+    if (window.TLJ && window.TLJ.hydrateFigures) window.TLJ.hydrateFigures(stationDetail);
     if (scroll) stationDetail.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
   if (TIMELINE_EVENTS.length) showStation(TIMELINE_EVENTS[0], { scroll: false });
@@ -410,13 +414,13 @@
         </div>
       `;
       btn.addEventListener("click", () => openModal(`
-        <span class="modal__eyebrow">Human Story · ${s.place}</span>
+        <span class="modal__eyebrow">Real survivor account · ${s.place}</span>
         <h3>${s.name}</h3>
         <blockquote class="quote-block">${s.quote}</blockquote>
-        <div class="modal__photo" role="img" aria-label="Photograph placeholder for ${s.name}">Photograph placeholder<br>— family photograph to be added</div>
         <p>${s.full}</p>
-        <div class="audio-placeholder">🎙️ Audio recording placeholder — not yet available</div>
-        <div>${s.tags.map(t => `<span class="archive-chip">${t}</span>`).join("")}</div>
+        <p style="font-size:.85rem; color:var(--text-soft);">This is this site's own short summary of a publicly documented account, not a verbatim transcript — read ${s.name.split(" ")[0]}'s story in full, and in their own words, at the source below.</p>
+        <a class="btn secondary" href="${s.sourceUrl}" target="_blank" rel="noopener noreferrer">${s.sourceName}</a>
+        <div style="margin-top:1rem;">${s.tags.map(t => `<span class="archive-chip">${t}</span>`).join("")}</div>
       `));
       luggageRack.appendChild(btn);
     });
@@ -443,10 +447,11 @@
       <div class="cassette__meta">${i.location} · Age at Partition: ${i.age}</div>
     `;
     btn.addEventListener("click", () => openModal(`
-      <span class="modal__eyebrow">Interview Archive · ${i.location}</span>
+      <span class="modal__eyebrow">Real recorded interview · ${i.location}</span>
       <h3>${i.name}</h3>
-      <div class="audio-placeholder">🎙️ Recording placeholder — awaiting contribution</div>
       <p>${i.transcript}</p>
+      <div class="audio-placeholder">🎙️ The recording itself is hosted by its original archive, not this site</div>
+      <a class="btn secondary" href="${i.sourceUrl}" target="_blank" rel="noopener noreferrer">Watch or read the full interview ↗</a>
     `));
     cassetteShelf.appendChild(btn);
   });
@@ -458,11 +463,23 @@
   GALLERY_ITEMS.forEach(g => {
     const btn = document.createElement("button");
     btn.className = "gallery-frame";
+    btn.dataset.wikiTitle = g.wikiTitle;
     btn.setAttribute("aria-label", g.caption);
-    btn.innerHTML = `<div class="modal__photo" style="height:100%; aspect-ratio:auto;">${g.tag}<br>Photograph placeholder</div>`;
+    btn.innerHTML = `<div class="gallery-frame__media" data-figure><span class="figure-fallback">${g.tag}<br><span class="figure-loading">loading from Wikipedia…</span></span></div>`;
     btn.addEventListener("click", () => {
-      document.getElementById("lightbox-img").style.display = "none";
-      document.getElementById("lightbox-caption").textContent = g.caption;
+      const img = document.getElementById("lightbox-img");
+      const cap = document.getElementById("lightbox-caption");
+      if (btn.dataset.resolvedSrc) {
+        img.src = btn.dataset.resolvedSrc;
+        img.alt = btn.dataset.resolvedTitle || g.caption;
+        img.style.display = "";
+        const creditUrl = btn.dataset.resolvedCreditUrl;
+        cap.innerHTML = g.caption + (creditUrl ? ` — <a href="${creditUrl}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a>` : "");
+      } else {
+        img.removeAttribute("src");
+        img.style.display = "none";
+        cap.textContent = g.caption;
+      }
       lightbox.classList.add("is-open");
     });
     galleryWall.appendChild(btn);

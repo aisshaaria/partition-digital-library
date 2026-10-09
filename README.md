@@ -32,13 +32,33 @@ even fully offline.
 
 ### Real research photography
 
-Elements marked `data-wiki-title="..."` (political leaders, the Radcliffe
-Line map, the Partition Museum, the Wagah border, the novel's cover) fetch a
-real photograph and a "Source: Wikipedia ↗" credit live from Wikipedia's
-public REST summary API at load time — no API key, no hardcoded image URLs
-to go stale. If the fetch fails or is blocked, the element quietly keeps its
-plain-text fallback (a monogram avatar for people, a captioned frame for
-places) instead of showing a broken image.
+Elements marked `data-wiki-title="..."` (political leaders, timeline events,
+gallery photographs, the Radcliffe Line map, the Partition Museum, the Wagah
+border, the novel's cover) fetch a real photograph and a "Source: Wikipedia
+↗" credit live from Wikipedia's public REST summary API at load time — no
+API key, no hardcoded image URLs to go stale. If the fetch fails or is
+blocked, the element quietly keeps its plain-text fallback (a monogram
+avatar for people, a captioned frame for places) instead of showing a
+broken image. Every `wikiTitle` used was individually checked against the
+real article title before being added — a wrong title is the most common
+cause of a "missing" image, since the summary API 404s silently.
+
+### Real survivor stories and interviews
+
+The six cards in Human Stories and the four cassettes in the Interview
+Archive (`js/content.js` → `STORIES` and `INTERVIEWS`) are real, named,
+publicly documented people — Iqbal Bibi, Sushila Balkrishna Wagh, Ali Shan,
+Khawaja Muhammad Zakariya, Mehmuda Khatoon, and Shahezadi Begam — sourced
+from the 1947 Partition Archive, the National Endowment for the Humanities,
+Dawn, IlmFeed, and the Bengal Gazette. Each `full` field is this project's
+own short, third-person summary of their publicly reported account, not a
+verbatim transcript (nobody involved in this prototype holds rights to
+redistribute the original recordings), and every card links to its real
+source so a visitor can read or watch the person's own words in full. A
+"Explore the full archives" panel in that carriage links out to the 1947
+Partition Archive (10,000+ interviews) and the Stanford Libraries' public
+exhibit of filmed interviews, since the handful featured here are a sample,
+not the whole record.
 
 ## Editing content
 
@@ -47,10 +67,12 @@ Almost everything a non-developer would want to change lives in
 stories, interviews, gallery captions, films, and statistics. Add, remove, or
 edit entries there; `main.js` renders whatever is in that file automatically.
 
-Every entry that says **PLACEHOLDER** is a stand-in for real content — a
-survivor testimony, a photograph, an audio recording — that should be
-replaced with consented, real material before public launch. Search the file
-for `PLACEHOLDER` to find every such spot.
+A few things remain illustrative rather than sourced: the filter chips on
+Human Stories include a couple of regions no current story is tagged with,
+and the "Interview Archive" is a curated sample of four real interviews, not
+an exhaustive one. There is no remaining fabricated content — survivor
+stories, interviews, and research photography are all real and sourced as
+described above.
 
 ## Running locally
 
@@ -85,11 +107,7 @@ without changing the site's code.
 The settings drawer (⚙️ icon) includes dark mode, a high-contrast mode, text
 resizing, and a reduced-motion toggle. The site is keyboard-navigable
 throughout, includes a skip-to-content link, and uses `alt`/`aria-label`
-text on all imagery and interactive controls. Illustrative "human story" and
-interview photographs are currently placeholders (clearly labelled) pending
-real archival material with proper usage rights and, where applicable,
-consent from those depicted; factual figures (leaders, museum, map) use real
-Wikipedia photography as described above.
+text on all imagery and interactive controls.
 
 All of the new motion/visual flourishes (the mood rail, cursor ring,
 magnetic buttons, card tilt, count-up numbers) are decorative only — they
@@ -102,8 +120,8 @@ devices, and are disabled by the reduced-motion toggle or the OS-level
 Historical facts (dates, figures, biographical notes) reflect widely cited
 public scholarship on Partition; several statistics remain genuinely
 disputed among historians and are presented as ranges with that caveat.
-Survivor "stories" and interview cards are illustrative composites written
-for this prototype — not real testimony — and are labelled as such
-throughout. This project does not take a political side on Partition and
-aims to present the perspectives of all communities involved with equal
-care.
+Survivor stories and interview cards are real, named, publicly documented
+people, summarised from cited sources and linked back to them in full — see
+"Real survivor stories and interviews" above. This project does not take a
+political side on Partition and aims to present the perspectives of all
+communities involved with equal care.

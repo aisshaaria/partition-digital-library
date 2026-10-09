@@ -289,8 +289,8 @@
     if (loading) loading.remove();
   }
 
-  function hydrateWikiFigures() {
-    document.querySelectorAll("[data-wiki-title]").forEach(el => {
+  function hydrateWikiFigures(root) {
+    (root || document).querySelectorAll("[data-wiki-title]:not(.gallery-frame)").forEach(el => {
       const title = el.dataset.wikiTitle;
       fetchWikiSummary(title).then(data => {
         if (el.classList.contains("book-cover")) { applyBookCover(el, data); return; }
@@ -303,5 +303,39 @@
     });
   }
   hydrateWikiFigures();
+
+  // Exposed so content rendered dynamically after this script runs (e.g.
+  // the timeline's station-detail panel, which replaces its own innerHTML
+  // on every click) can hydrate its own real photos on demand.
+  window.TLJ = window.TLJ || {};
+  window.TLJ.hydrateFigures = hydrateWikiFigures;
+
+  /* Gallery frames are <button>s — a nested <a> credit link would be invalid
+     HTML there, so these resolve onto data attributes instead and the
+     credit is shown in the lightbox caption (main.js) when opened. */
+  function hydrateGalleryFigures() {
+    document.querySelectorAll(".gallery-frame[data-wiki-title]").forEach(btn => {
+      const title = btn.dataset.wikiTitle;
+      const target = btn.querySelector("[data-figure]");
+      fetchWikiSummary(title).then(data => {
+        const src = pickImageSrc(data);
+        if (!src) { if (target) settleFallback(target); return; }
+        if (target) {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = data.title || "";
+          img.loading = "lazy";
+          target.textContent = "";
+          target.appendChild(img);
+        }
+        btn.dataset.resolvedSrc = src;
+        btn.dataset.resolvedTitle = data.title || "";
+        if (data.content_urls && data.content_urls.desktop) {
+          btn.dataset.resolvedCreditUrl = data.content_urls.desktop.page;
+        }
+      }).catch(() => { if (target) settleFallback(target); });
+    });
+  }
+  hydrateGalleryFigures();
 
 })();

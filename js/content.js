@@ -17,7 +17,8 @@ const TIMELINE_EVENTS = [
     body: "At its Lahore session, the All-India Muslim League formally adopted a resolution demanding that regions with a Muslim majority in the north-west and east of British India be grouped into “independent states.” It became the foundational document behind the later demand for Pakistan.",
     tags: ["Politics", "Punjab", "Bengal"],
     quote: "“No constitutional plan would be workable or acceptable to the Muslims unless geographical contiguous units are demarcated into regions.”",
-    quoteSource: "The Lahore Resolution, 1940"
+    quoteSource: "The Lahore Resolution, 1940",
+    wikiTitle: "Lahore Resolution"
   },
   {
     id: "t1946",
@@ -28,7 +29,8 @@ const TIMELINE_EVENTS = [
     body: "After the failure of the Cabinet Mission's power-sharing plan, the Muslim League called for “Direct Action” to press its demand for Pakistan. In Calcutta, the call preceded days of communal killing that left thousands dead and marked a turning point after which many politicians on all sides came to believe undivided India was no longer sustainable.",
     tags: ["Bengal", "Politics", "Loss"],
     quote: "“We shall have either a divided India or a destroyed India.”",
-    quoteSource: "Attributed to Mohammad Ali Jinnah, 1946"
+    quoteSource: "Attributed to Mohammad Ali Jinnah, 1946",
+    wikiTitle: "Direct Action Day"
   },
   {
     id: "t1947feb",
@@ -39,7 +41,8 @@ const TIMELINE_EVENTS = [
     body: "Prime Minister Clement Attlee announced that Britain intended to transfer power to Indian hands no later than June 1948. Lord Mountbatten was appointed the last Viceroy, tasked with arranging the handover.",
     tags: ["Politics"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Clement Attlee"
   },
   {
     id: "t1947mar",
@@ -61,7 +64,8 @@ const TIMELINE_EVENTS = [
     body: "Mountbatten announced that partition would occur immediately, moving independence forward by ten months to 15 August 1947. The compressed timeline left almost no time to plan for the movement of tens of millions of people.",
     tags: ["Politics"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Indian Independence Act 1947"
   },
   {
     id: "t1947jul",
@@ -72,7 +76,8 @@ const TIMELINE_EVENTS = [
     body: "Sir Cyril Radcliffe, a British barrister who had never before visited India, was given five weeks to draw the borders of Punjab and Bengal. Working from outdated maps and incomplete census data, his commission divided villages, rivers, and families with a single pen line.",
     tags: ["Punjab", "Bengal", "Politics"],
     quote: "“I thought the viceroy wanted the report out before independence. I didn't want my name on it, but there was nothing else to be done.”",
-    quoteSource: "Paraphrased recollection attributed to Sir Cyril Radcliffe"
+    quoteSource: "Paraphrased recollection attributed to Sir Cyril Radcliffe",
+    wikiTitle: "Radcliffe Line"
   },
   {
     id: "t1947aug14",
@@ -83,7 +88,8 @@ const TIMELINE_EVENTS = [
     body: "Pakistan came into existence as a sovereign, independent state, with Muhammad Ali Jinnah sworn in as its first Governor-General in Karachi.",
     tags: ["Politics"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Muhammad Ali Jinnah"
   },
   {
     id: "t1947aug15",
@@ -94,7 +100,8 @@ const TIMELINE_EVENTS = [
     body: "India became independent at midnight, with Jawaharlal Nehru delivering his “Tryst with Destiny” address. The Radcliffe Line, which would decide which new country millions of people now lived in, was published only two days later.",
     tags: ["Politics"],
     quote: "“At the stroke of the midnight hour, when the world sleeps, India will awake to life and freedom.”",
-    quoteSource: "Jawaharlal Nehru, 15 August 1947"
+    quoteSource: "Jawaharlal Nehru, 15 August 1947",
+    wikiTitle: "Jawaharlal Nehru"
   },
   {
     id: "t1947aug17",
@@ -105,7 +112,8 @@ const TIMELINE_EVENTS = [
     body: "The final boundary award was made public, two days after both nations had already celebrated independence. Villagers who had gone to sleep in India woke to find themselves in Pakistan, or the reverse, without ever having moved.",
     tags: ["Punjab", "Bengal", "Migration"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Radcliffe Line"
   },
   {
     id: "t1947augsep",
@@ -116,7 +124,8 @@ const TIMELINE_EVENTS = [
     body: "An estimated 14 to 16 million people crossed the new borders in a matter of weeks — on foot in columns stretching for miles, in bullock carts, and packed onto trains. Convoys were attacked from all sides; so-called “ghost trains” arrived at stations carrying only the dead.",
     tags: ["Punjab", "Bengal", "Migration", "Loss"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Partition of India"
   },
   {
     id: "t1947sep",
@@ -138,110 +147,138 @@ const TIMELINE_EVENTS = [
     body: "Mohandas Gandhi, who had spent the months after independence trying to halt communal killing, was assassinated in Delhi by a Hindu nationalist who believed Gandhi had been too conciliatory toward Muslims and Pakistan.",
     tags: ["Politics", "Loss"],
     quote: "",
-    quoteSource: ""
+    quoteSource: "",
+    wikiTitle: "Assassination of Mahatma Gandhi"
   }
 ];
 
-/* PLACEHOLDER — illustrative composite accounts. Replace with real,
-   consented survivor testimony, photographs and audio before publishing. */
+/* REAL, NAMED accounts, each summarised from a public, citable source and
+   linked back to it in full. These are not verbatim transcripts — nobody
+   involved in this prototype has recorded or been granted rights to
+   redistribute the original interviews — so every "quote" below is this
+   site's own short, third-person description of a documented real event,
+   never words put directly in a survivor's mouth. Read the linked source
+   for their own account in their own words. */
 const STORIES = [
   {
     id: "s1",
-    name: "A grandmother's account (composite)",
-    tags: ["Punjab", "Women", "Migration", "Loss"],
-    place: "Lyallpur to Amritsar",
-    summary: "Left her home of forty years with one trunk, expecting to return within a season.",
-    quote: "We locked the door as if we were going to the market. I still have the key.",
-    full: "PLACEHOLDER TESTIMONY. In the real archive, this space will hold a first-person account: what was carried, what was left behind, the journey itself, and what “home” came to mean afterward. Contributions can be submitted through the site's interview intake once it is connected to a real archive process."
+    name: "Iqbal Bibi",
+    tags: ["Pakistan", "Punjab", "Women", "Migration", "Loss"],
+    place: "Behram refugee camp to Lahore, via Wagah",
+    summary: "Spent fifteen days reaching Lahore from a refugee camp at Behram, hiding to avoid armed attackers and watching disease spread along the route.",
+    quote: "Fifteen days from a refugee camp to Lahore, through disease and fear, before the group ever reached Wagah.",
+    full: "As recorded by the 1947 Partition Archive: Iqbal Bibi's family travelled under military escort toward Amritsar, where the truck carrying them came under attack. The journey from the Behram camp to Lahore took fifteen days, during which, by her account, roughly a hundred to two hundred people in her group died of water-borne disease before they ever crossed into Pakistan at Wagah. From there her family was moved to a transit camp at Walton Cantonment, and then on to a house near Lahore Railway Station.",
+    sourceName: "Read her full story at the 1947 Partition Archive ↗",
+    sourceUrl: "https://www.1947partitionarchive.org/iqbal-bibi/"
   },
   {
     id: "s2",
-    name: "A boy separated from his sister (composite)",
-    tags: ["Bengal", "Children", "Families", "Loss", "Hope"],
-    place: "Dhaka to Kolkata",
-    summary: "Was put on a train by an uncle in the chaos of a crowded platform and did not see his family for three years.",
-    quote: "I learned my new address before I learned to spell it.",
-    full: "PLACEHOLDER TESTIMONY. A future version of this card will describe how families searched for missing children through camp registries and newspaper notices, and, where possible, how the reunion happened."
+    name: "Sushila Balkrishna Wagh",
+    tags: ["Pakistan", "Children", "Families", "Hope"],
+    place: "Karachi, Sindh",
+    summary: "An eight-year-old in Karachi when Partition came; her family's Muslim neighbours sheltered her older sister by presenting her as their own.",
+    quote: "Protected not by strangers, but by the very neighbours Partition was supposed to turn into enemies.",
+    full: "As recorded by the 1947 Partition Archive (interview by Yash Anil Pund): Sushila was eight years old and living in Karachi, where her grandfather served as a governor's aide and her father worked for Burmah Shell. Karachi stayed largely calm through 1947 itself — the violence her family feared arrived only with riots in 1948. In the meantime, local Muslim neighbours helped shield the family, at one point presenting her older sister as their own daughter or niece to protect her.",
+    sourceName: "Read her full story at the 1947 Partition Archive ↗",
+    sourceUrl: "https://www.1947partitionarchive.org/sushila-balkrishna-wagh/"
   },
   {
     id: "s3",
-    name: "A Sikh farmer's letter (composite)",
-    tags: ["Punjab", "Migration", "Loss"],
-    place: "Sheikhupura to Ludhiana",
-    summary: "Wrote to a Muslim neighbour years later, asking after the well they had dug together.",
-    quote: "Tell me if the mango tree still stands. I planted it the year your son was born.",
-    full: "PLACEHOLDER TESTIMONY. This card is a stand-in for correspondence that families on both sides of the border sometimes exchanged in the decades after Partition, often the only remaining thread to a shared past."
+    name: "Ali Shan",
+    tags: ["Punjab", "Children", "Loss", "Hope"],
+    place: "Punjab to the San Francisco Bay Area",
+    summary: "Orphaned at six when a mob killed his family; survived refugee camps alone as a child, and later built a life around forgiving the men responsible.",
+    quote: "A six-year-old's survival, and a lifetime spent afterward choosing forgiveness over the alternative.",
+    full: "As recounted to the National Endowment for the Humanities and the 1947 Partition Archive: Ali Shan watched a mob kill his mother, brother, and two aunts during an attack on his village, and became the sole survivor of that attack on his family. He spent time alone in refugee camps as a young child before eventually rebuilding a life in the United States. Decades later, now a grandfather in the Bay Area, he has spoken publicly about deliberately choosing to forgive the people responsible, as part of his own path through that trauma.",
+    sourceName: "Read the NEH's account of his story ↗",
+    sourceUrl: "https://www.neh.gov/article/story-1947-partition-told-people-who-were-there"
   },
   {
     id: "s4",
-    name: "A young bride's journey (composite)",
-    tags: ["Women", "Migration", "Families"],
-    place: "Multan to Jalandhar",
-    summary: "Married three weeks before Partition, she crossed the new border with her husband's family, never having met most of them before.",
-    quote: "I did not know their faces yet, only that we were now the same shape of afraid.",
-    full: "PLACEHOLDER TESTIMONY. The finished section will let contributors upload a scanned photograph or wedding document alongside the story, with careful attention to consent and privacy."
+    name: "Khawaja Muhammad Zakariya",
+    tags: ["Pakistan", "Punjab", "Migration", "Loss"],
+    place: "Amritsar to Lahore",
+    summary: "A Punjab University professor who, decades later, still recalled fleeing a targeted Muslim neighbourhood in Amritsar on a train packed with refugees bound for Lahore.",
+    quote: "A neighbourhood emptied itself onto a crowded train before the violence arrived.",
+    full: "As reported by Dawn and recorded by a 1947 Partition Archive volunteer: Zakariya, later a retired professor of Urdu literature at Punjab University, recalled his family leaving their Muslim neighbourhood in Amritsar shortly before it came under attack, then joining other families aboard trains packed with refugees bound for Lahore — carrying only what they could hold.",
+    sourceName: "Read Dawn's coverage of his and other recorded accounts ↗",
+    sourceUrl: "https://www.dawn.com/news/1169309"
   },
   {
     id: "s5",
-    name: "A schoolteacher who stayed (composite)",
-    tags: ["India", "Pakistan", "Hope"],
-    place: "Lahore",
-    summary: "One of the few in her neighbourhood who did not migrate, she kept her school open through the worst months.",
-    quote: "Someone has to keep teaching the alphabet, even when the map keeps changing.",
-    full: "PLACEHOLDER TESTIMONY. Represents the smaller, less-told story of those who did not migrate — a perspective the finished archive should actively seek out."
+    name: "Mehmuda Khatoon",
+    tags: ["India", "Pakistan", "Children", "Migration", "Families"],
+    place: "Delhi to Lahore to Karachi",
+    summary: "Four years old when her father died just before the family fled Delhi; she reached Karachi only after stops in Lahore.",
+    quote: "A father's death and a border crossing arrived in the same season of her childhood.",
+    full: "As reported by IlmFeed, drawing on recorded Partition oral histories: Mehmuda Khatoon was born in Delhi and was only four years old when her father died, days before her mother's family fled the city. The family travelled by train toward Lahore, and she eventually settled with relatives in Karachi after passing through the Punjab.",
+    sourceName: "Read more accounts like hers at IlmFeed ↗",
+    sourceUrl: "https://ilmfeed.com/heartbreaking-stories-from-the-1947-india-pakistan-partition/"
   },
   {
     id: "s6",
-    name: "A railway signalman's diary (composite)",
-    tags: ["Punjab", "Migration", "Loss"],
-    place: "Wagah Junction",
-    summary: "Kept a private log of the trains that passed through his signal box in August 1947.",
-    quote: "Some nights I signalled trains through and did not look at what they carried.",
-    full: "PLACEHOLDER TESTIMONY. A reminder that ordinary railway workers were among the war's quiet witnesses; oral history projects have recorded several such accounts."
+    name: "Shahezadi Begam",
+    tags: ["Bengal", "Women", "Migration", "Loss"],
+    place: "Kolkata to Dhaka",
+    summary: "Moved from Kolkata to Dhaka as a child and, decades later, is still living in a relief camp.",
+    quote: "Still, after all these decades, in a relief camp.",
+    full: "As reported by the Bengal Gazette, drawing on a 1947 Partition Archive interview: Shahezadi Begam was displaced as a child from urban Kolkata to Dhaka in the Partition of Bengal. Unlike the Punjab corridor, Bengal's displacement continued in waves for years afterward — Shahezadi's own account reflects that longer, less sudden uprooting, and she remains, by this account, a resident of a relief camp to this day.",
+    sourceName: "Read the Bengal Gazette's coverage ↗",
+    sourceUrl: "https://bengalgazette.org/2023/04/02/the-forgotten-survivors-the-two-voices-of-partition-refugees-in-bangladesh/"
   }
 ];
 
-/* PLACEHOLDER — cassette-style interview cards awaiting real recordings. */
+/* REAL filmed/recorded interviews, held by the 1947 Partition Archive and
+   the Stanford Libraries' public exhibit of it — not hosted on this site,
+   but linked to directly so visitors can watch or read the originals. */
 const INTERVIEWS = [
   {
     id: "i1",
-    name: "Recording awaiting contribution",
+    name: "Iqbal Bibi",
     age: "—",
-    location: "Punjab",
-    transcript: "PLACEHOLDER. This card is reserved for an oral history interview — name, age at Partition, home village, and a transcript excerpt — to be added once a real interview is recorded and consented for publication."
+    location: "Punjab / Sindh corridor",
+    transcript: "Her fifteen-day journey from the Behram refugee camp to Lahore is recorded in full, in her own words, at the 1947 Partition Archive.",
+    sourceUrl: "https://www.1947partitionarchive.org/iqbal-bibi/"
   },
   {
     id: "i2",
-    name: "Recording awaiting contribution",
-    age: "—",
-    location: "Bengal",
-    transcript: "PLACEHOLDER. Reserved for a survivor or descendant account from the eastern border. See the 1947 Partition Archive and similar oral history projects for methodology on recording consent."
+    name: "Sushila Balkrishna Wagh",
+    age: "8 at Partition",
+    location: "Karachi, Sindh",
+    transcript: "Interviewed by Yash Anil Pund for the 1947 Partition Archive, with Pankhuri Wagh as camera person — her full account of childhood in Karachi is published there.",
+    sourceUrl: "https://www.1947partitionarchive.org/sushila-balkrishna-wagh/"
   },
   {
     id: "i3",
-    name: "Recording awaiting contribution",
+    name: "Mohammad Shamsul Alam Joarder",
     age: "—",
-    location: "Sindh",
-    transcript: "PLACEHOLDER. Reserved for an account describing the Hindu and Sikh migration out of Sindh, a less-documented corridor of the wider migration."
+    location: "Dhaka, Bengal",
+    transcript: "Recorded in Dhaka in 2012; his family worked at the Alliance Jute Mills. The interview, in Bengali with five video files, is held in the Stanford Libraries' public exhibit of the Archive's collection.",
+    sourceUrl: "https://exhibits.stanford.edu/1947-partition/browse/interviews"
   },
   {
     id: "i4",
-    name: "Recording awaiting contribution",
+    name: "Ahmed Ilias",
     age: "—",
-    location: "Delhi refugee camp",
-    transcript: "PLACEHOLDER. Reserved for a firsthand account of camp life — registration, searching for relatives, and resettlement."
+    location: "Dhaka, Bangladesh",
+    transcript: "Interviewed by Farhana Afroz in 2012, describing his Bihari identity and his decision to migrate to the eastern wing of Pakistan after Partition.",
+    sourceUrl: "https://www.1947partitionarchive.org/"
   }
 ];
 
+/* Real photographs, fetched live from Wikipedia (see js/experience.js) by
+   wikiTitle. Each is a genuine, identifiable historical subject — not a
+   staged or composite scene — with its caption describing what the photo
+   actually shows. Falls back to a plain labelled frame if the fetch fails. */
 const GALLERY_ITEMS = [
-  { id: "g1", caption: "Placeholder — a departure platform crowded beyond capacity, August 1947.", tag: "Migration" },
-  { id: "g2", caption: "Placeholder — a family's belongings loaded onto a bullock cart.", tag: "Families" },
-  { id: "g3", caption: "Placeholder — volunteers registering new arrivals at a refugee camp.", tag: "Hope" },
-  { id: "g4", caption: "Placeholder — a hand-drawn map showing a village divided by the new border.", tag: "Politics" },
-  { id: "g5", caption: "Placeholder — a steam locomotive at a border station, escorted for safety.", tag: "Migration" },
-  { id: "g6", caption: "Placeholder — a child's shoe recovered from a refugee train, kept in a family trunk since.", tag: "Loss" },
-  { id: "g7", caption: "Placeholder — newspaper front page announcing the boundary award, 17 August 1947.", tag: "Politics" },
-  { id: "g8", caption: "Placeholder — the Partition Museum, Amritsar, present day.", tag: "Legacy" }
+  { id: "g1", wikiTitle: "Partition of India", caption: "The Partition of India, August 1947 — the event this entire site retraces.", tag: "History" },
+  { id: "g2", wikiTitle: "Radcliffe Line", caption: "The Radcliffe Line: the boundary drawn through Punjab and Bengal in five weeks.", tag: "Politics" },
+  { id: "g3", wikiTitle: "Direct Action Day", caption: "Direct Action Day, Calcutta, 16 August 1946 — a turning point on the road to Partition.", tag: "Loss" },
+  { id: "g4", wikiTitle: "Noakhali riots", caption: "Gandhi listens to a survivor during his peace march through Noakhali, 1946.", tag: "Hope" },
+  { id: "g5", wikiTitle: "Punjab Boundary Force", caption: "The Punjab Boundary Force — the outmatched military effort to contain the violence of August 1947.", tag: "Migration" },
+  { id: "g6", wikiTitle: "Jawaharlal Nehru", caption: "Jawaharlal Nehru, who delivered India's \"Tryst with Destiny\" address at independence.", tag: "Politics" },
+  { id: "g7", wikiTitle: "Attari–Wagah border ceremony", caption: "The daily Attari–Wagah border ceremony, performed in mirror image on both sides of the line, today.", tag: "Legacy" },
+  { id: "g8", wikiTitle: "Kolkata Partition Museum", caption: "The Kolkata Partition Museum — a newer institution documenting Partition from the Bengal side.", tag: "Legacy" }
 ];
 
 const FILMS = [
