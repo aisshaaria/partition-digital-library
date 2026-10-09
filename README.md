@@ -15,14 +15,30 @@ index.html        The entire site: hero + all 16 "carriages" (sections)
 css/style.css     All styling — sepia/parchment theme, layout, animations
 js/content.js     All content data (timeline, stories, interviews, films,
                   gallery captions, statistics, reflections, search index)
-js/main.js        All interactivity (navigation, timeline, map, filters,
+js/main.js        Core interactivity (navigation, timeline, map, filters,
                   modals, accessibility settings, reflection wall, sound)
+js/experience.js  The "wow" layer: a scroll-driven mood rail, a live journey
+                  HUD, a trailing cursor ring, magnetic/tilt interactions,
+                  animated statistics, and real research photography
 ```
 
 Everything is self-contained except the Google Fonts stylesheet loaded in
-`css/style.css`, which requires the visitor's browser to have normal internet
-access (standard for any deployed website; falls back to system serif fonts
-if unavailable).
+`css/style.css`, and the live Wikipedia photo lookups in `js/experience.js`
+— both require the visitor's browser to have normal internet access
+(standard for any deployed website). Both degrade gracefully: fonts fall
+back to system serif, and every figure that would carry a Wikipedia photo
+already has real, hand-written caption text, so the page reads correctly
+even fully offline.
+
+### Real research photography
+
+Elements marked `data-wiki-title="..."` (political leaders, the Radcliffe
+Line map, the Partition Museum, the Wagah border, the novel's cover) fetch a
+real photograph and a "Source: Wikipedia ↗" credit live from Wikipedia's
+public REST summary API at load time — no API key, no hardcoded image URLs
+to go stale. If the fetch fails or is blocked, the element quietly keeps its
+plain-text fallback (a monogram avatar for people, a captioned frame for
+places) instead of showing a broken image.
 
 ## Editing content
 
@@ -69,9 +85,17 @@ without changing the site's code.
 The settings drawer (⚙️ icon) includes dark mode, a high-contrast mode, text
 resizing, and a reduced-motion toggle. The site is keyboard-navigable
 throughout, includes a skip-to-content link, and uses `alt`/`aria-label`
-text on all imagery and interactive controls. All photographs are currently
-placeholders (clearly labelled) pending real archival material with proper
-usage rights and, where applicable, consent from those depicted.
+text on all imagery and interactive controls. Illustrative "human story" and
+interview photographs are currently placeholders (clearly labelled) pending
+real archival material with proper usage rights and, where applicable,
+consent from those depicted; factual figures (leaders, museum, map) use real
+Wikipedia photography as described above.
+
+All of the new motion/visual flourishes (the mood rail, cursor ring,
+magnetic buttons, card tilt, count-up numbers) are decorative only — they
+never carry information on their own, are skipped entirely for touch
+devices, and are disabled by the reduced-motion toggle or the OS-level
+"prefers reduced motion" setting.
 
 ## A note on content
 
