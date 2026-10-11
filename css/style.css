@@ -476,25 +476,49 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-vis
 @media (max-width: 900px){ .map-wrap{ grid-template-columns: 1fr; } }
 .parchment-map{
   position: relative; border: 6px solid var(--brass); border-radius: var(--radius-md);
+  background: #f3e7c6;
+  box-shadow: inset 0 0 60px rgba(90,60,20,.25), 0 10px 24px var(--shadow);
+  padding: 0; overflow: hidden; min-height: 320px;
+}
+.parchment-map__img{
+  display: block; width: 100%; height: auto;
+  filter: sepia(.45) contrast(1.05) saturate(1.1);
+  background: #f3e7c6;
+}
+/* If the real map image can't load (offline, blocked), fall back to a
+   plain parchment backdrop so the pins still sit on something sensible. */
+.parchment-map.img-failed{
   background: radial-gradient(ellipse at 30% 20%, #f6e8c4, #e2c893 60%, #cdaa6d);
-  box-shadow: inset 0 0 60px rgba(90,60,20,.35), 0 10px 24px var(--shadow);
-  padding: 1rem;
+  min-height: 420px;
 }
-.parchment-map svg{ width:100%; height:auto; }
-.map-region{ cursor: pointer; transition: opacity var(--dur-fast); opacity: .85; }
-.map-region:hover, .map-region:focus-visible{ opacity: 1; }
-.map-region[aria-pressed="true"]{ stroke: var(--rust); stroke-width: 3; }
-/* Labels and routes are decorative and sit visually on top of the regions;
-   without this they silently swallow clicks aimed at the region beneath. */
-.parchment-map svg text{ pointer-events: none; }
-.migration-route{
-  fill: none; stroke: var(--rust); stroke-width: 2.5; stroke-dasharray: 6 6;
-  stroke-linecap: round; opacity: .8;
-  stroke-dashoffset: 0;
-  pointer-events: none;
-  animation: dash-flow 6s linear infinite;
+.parchment-map.img-failed .parchment-map__img{ display: none; }
+.map-pins{ position: absolute; inset: 0; }
+.map-pin{
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: .35rem;
+  background: none; border: none; cursor: pointer; padding: .4rem;
 }
-@keyframes dash-flow{ to{ stroke-dashoffset: -240; } }
+.map-pin__dot{
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--rust); border: 2px solid var(--cream);
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  transition: transform var(--dur-fast), background var(--dur-fast);
+}
+.map-pin:hover .map-pin__dot, .map-pin:focus-visible .map-pin__dot{ transform: scale(1.35); }
+.map-pin[aria-pressed="true"] .map-pin__dot{ background: var(--brass-light); box-shadow: 0 0 0 4px rgba(203,168,94,.35); }
+.map-pin__label{
+  font-family: var(--font-stamp); font-size: .72rem; letter-spacing: .02em;
+  background: rgba(27,20,11,.85); color: var(--cream);
+  padding: .2em .65em; border-radius: 999px; white-space: nowrap;
+  border: 1px solid rgba(203,168,94,.5);
+}
+.parchment-map__credit{
+  position: absolute; right: .6rem; bottom: .5rem;
+  font-family: var(--font-stamp); font-size: .65rem;
+  background: rgba(27,20,11,.7); color: var(--cream);
+  padding: .2em .6em; border-radius: 4px;
+}
+.parchment-map__credit a{ color: var(--brass-light); }
 .map-info{ min-height: 260px; }
 .map-info__placeholder{ color: var(--text-soft); font-style: italic; }
 .stat-line{ display:flex; justify-content: space-between; border-bottom: 1px dotted var(--border-color); padding: .4em 0; }

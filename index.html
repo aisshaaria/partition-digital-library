@@ -312,23 +312,28 @@
       <p class="carriage-lede">A parchment map of the routes people took. Select a region to read what happened there.</p>
     </div>
     <div class="map-wrap reveal">
-      <div class="parchment-map">
-        <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified historical map of undivided India in 1947, showing Punjab, Bengal, Sindh and Delhi regions with migration routes">
-          <title>Simplified 1947 map with clickable regions</title>
-          <!-- Undivided India, decorative silhouette for context -->
-          <path d="M115,45 L365,35 Q460,55 495,150 L525,250 Q515,370 390,450 L310,485 L235,450 Q115,395 85,290 L55,165 Q60,85 115,45 Z" fill="#dcc593" stroke="#8a6a3a" stroke-width="1.5" opacity=".55"/>
-          <path class="map-region" data-region="punjab" tabindex="0" role="button" aria-pressed="false" aria-label="Punjab" d="M115,55 L335,45 L345,165 L225,205 L120,180 Z" fill="#c9a86a" stroke="#5c4322" stroke-width="2"/>
-          <path class="map-region" data-region="delhi" tabindex="0" role="button" aria-pressed="false" aria-label="Delhi and border regions" d="M225,205 L310,190 L330,270 L245,280 Z" fill="#d6b978" stroke="#5c4322" stroke-width="2"/>
-          <path class="map-region" data-region="sindh" tabindex="0" role="button" aria-pressed="false" aria-label="Sindh" d="M70,195 L120,180 L135,325 L95,390 L45,305 Z" fill="#bfa15f" stroke="#5c4322" stroke-width="2"/>
-          <path class="map-region" data-region="bengal" tabindex="0" role="button" aria-pressed="false" aria-label="Bengal" d="M375,160 L480,150 L515,265 L445,330 L365,265 Z" fill="#c9a86a" stroke="#5c4322" stroke-width="2"/>
-          <path class="migration-route" d="M230,120 Q250,170 270,225"/>
-          <path class="migration-route" d="M95,280 Q180,260 260,235"/>
-          <path class="migration-route" d="M440,195 Q460,240 430,290"/>
-          <text x="195" y="120" font-family="Special Elite, monospace" font-size="18" fill="#3a2410" text-anchor="middle">Punjab</text>
-          <text x="275" y="238" font-family="Special Elite, monospace" font-size="13" fill="#3a2410" text-anchor="middle">Delhi</text>
-          <text x="95" y="265" font-family="Special Elite, monospace" font-size="17" fill="#3a2410" text-anchor="middle">Sindh</text>
-          <text x="440" y="245" font-family="Special Elite, monospace" font-size="17" fill="#3a2410" text-anchor="middle">Bengal</text>
-        </svg>
+      <div class="parchment-map" id="parchment-map">
+        <img
+          class="parchment-map__img"
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/Partition_of_India_1947_en.svg"
+          alt="1947 map of the partition of British India into India and Pakistan, showing the division of Punjab and Bengal"
+          loading="lazy"
+          onerror="this.closest('#parchment-map').classList.add('img-failed')">
+        <div class="map-pins" role="group" aria-label="Clickable regions">
+          <button class="map-region map-pin" data-region="punjab" aria-pressed="false" aria-label="Punjab" style="left:29%; top:23%;">
+            <span class="map-pin__dot"></span><span class="map-pin__label">Punjab</span>
+          </button>
+          <button class="map-region map-pin" data-region="delhi" aria-pressed="false" aria-label="Delhi and border regions" style="left:39%; top:35%;">
+            <span class="map-pin__dot"></span><span class="map-pin__label">Delhi</span>
+          </button>
+          <button class="map-region map-pin" data-region="sindh" aria-pressed="false" aria-label="Sindh" style="left:19%; top:44%;">
+            <span class="map-pin__dot"></span><span class="map-pin__label">Sindh</span>
+          </button>
+          <button class="map-region map-pin" data-region="bengal" aria-pressed="false" aria-label="Bengal" style="left:76%; top:47%;">
+            <span class="map-pin__dot"></span><span class="map-pin__label">Bengal</span>
+          </button>
+        </div>
+        <span class="parchment-map__credit">Map: <a href="https://en.wikipedia.org/wiki/Partition_of_India" target="_blank" rel="noopener noreferrer">Wikipedia ↗</a></span>
       </div>
       <div class="paper-card pad map-info" id="map-info">
         <p class="map-info__placeholder">Select a region on the map to see migration routes, estimated numbers, and what happened there.</p>
