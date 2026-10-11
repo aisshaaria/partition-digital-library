@@ -1,9 +1,9 @@
 /* =========================================================================
-   THE LAST JOURNEY — content data
+   THE LAST JOURNEY: content data
    All entries below are historically-grounded summaries EXCEPT where a
-   record is explicitly marked as a "placeholder" — those are illustrative
+   record is explicitly marked as a "placeholder": those are illustrative
    composites written for this prototype, standing in for real survivor
-   testimony, photographs, and audio that should replace them before the
+   testimony, photographs and audio that should replace them before the
    site is published. Search PLACEHOLDER to find every such spot.
    ========================================================================= */
 
@@ -73,7 +73,7 @@ const TIMELINE_EVENTS = [
     date: "8 July 1947",
     name: "The Radcliffe Line is drawn",
     teaser: "A boundary decided in five weeks.",
-    body: "Sir Cyril Radcliffe, a British barrister who had never before visited India, was given five weeks to draw the borders of Punjab and Bengal. Working from outdated maps and incomplete census data, his commission divided villages, rivers, and families with a single pen line.",
+    body: "Sir Cyril Radcliffe, a British barrister who had never before visited India, was given five weeks to draw the borders of Punjab and Bengal. Working from outdated maps and incomplete census data, his commission divided villages, rivers and families with a single pen line.",
     tags: ["Punjab", "Bengal", "Politics"],
     quote: "“I thought the viceroy wanted the report out before independence. I didn't want my name on it, but there was nothing else to be done.”",
     quoteSource: "Paraphrased recollection attributed to Sir Cyril Radcliffe",
@@ -121,7 +121,7 @@ const TIMELINE_EVENTS = [
     date: "August–September 1947",
     name: "The great migration",
     teaser: "The largest mass migration in recorded history.",
-    body: "An estimated 14 to 16 million people crossed the new borders in a matter of weeks — on foot in columns stretching for miles, in bullock carts, and packed onto trains. Convoys were attacked from all sides; so-called “ghost trains” arrived at stations carrying only the dead.",
+    body: "An estimated 14 to 16 million people crossed the new borders in a matter of weeks, on foot in columns stretching for miles, in bullock carts and packed onto trains. Convoys were attacked from all sides; so-called “ghost trains” arrived at stations carrying only the dead.",
     tags: ["Punjab", "Bengal", "Migration", "Loss"],
     quote: "",
     quoteSource: "",
@@ -132,8 +132,8 @@ const TIMELINE_EVENTS = [
     year: "1947",
     date: "September 1947",
     name: "The refugee camps",
-    teaser: "Kurukshetra, Walton, and cities of tents.",
-    body: "Vast camps sprang up on both sides of the new border — the camp at Kurukshetra alone sheltered several hundred thousand people at its peak. Volunteers, including women's organisations, worked to trace missing family members and reunite separated children with relatives.",
+    teaser: "Kurukshetra, Walton and cities of tents.",
+    body: "Vast camps sprang up on both sides of the new border. The camp at Kurukshetra alone sheltered several hundred thousand people at its peak. Volunteers, including women's organisations, worked to trace missing family members and reunite separated children with relatives.",
     tags: ["Migration", "Families", "Hope"],
     quote: "",
     quoteSource: ""
@@ -153,9 +153,9 @@ const TIMELINE_EVENTS = [
 ];
 
 /* REAL, NAMED accounts, each summarised from a public, citable source and
-   linked back to it in full. These are not verbatim transcripts — nobody
+   linked back to it in full. These are not verbatim transcripts. Nobody
    involved in this prototype has recorded or been granted rights to
-   redistribute the original interviews — so every "quote" below is this
+   redistribute the original interviews, so every "quote" below is this
    site's own short, third-person description of a documented real event,
    never words put directly in a survivor's mouth. Read the linked source
    for their own account in their own words. */
@@ -177,8 +177,8 @@ const STORIES = [
     tags: ["Pakistan", "Children", "Families", "Hope"],
     place: "Karachi, Sindh",
     summary: "An eight-year-old in Karachi when Partition came; her family's Muslim neighbours sheltered her older sister by presenting her as their own.",
-    quote: "Protected not by strangers, but by the very neighbours Partition was supposed to turn into enemies.",
-    full: "As recorded by the 1947 Partition Archive (interview by Yash Anil Pund): Sushila was eight years old and living in Karachi, where her grandfather served as a governor's aide and her father worked for Burmah Shell. Karachi stayed largely calm through 1947 itself — the violence her family feared arrived only with riots in 1948. In the meantime, local Muslim neighbours helped shield the family, at one point presenting her older sister as their own daughter or niece to protect her.",
+    quote: "Shielded by the very neighbours Partition was supposed to turn into enemies.",
+    full: "As recorded by the 1947 Partition Archive (interview by Yash Anil Pund): Sushila was eight years old and living in Karachi, where her grandfather served as a governor's aide and her father worked for Burmah Shell. Karachi stayed largely calm through 1947 itself. The violence her family feared arrived only with riots in 1948. In the meantime, local Muslim neighbours helped shield the family, at one point presenting her older sister as their own daughter or niece to protect her.",
     sourceName: "Read her full story at the 1947 Partition Archive ↗",
     sourceUrl: "https://www.1947partitionarchive.org/sushila-balkrishna-wagh/"
   },
@@ -189,7 +189,7 @@ const STORIES = [
     place: "Punjab to the San Francisco Bay Area",
     summary: "Orphaned at six when a mob killed his family; survived refugee camps alone as a child, and later built a life around forgiving the men responsible.",
     quote: "A six-year-old's survival, and a lifetime spent afterward choosing forgiveness over the alternative.",
-    full: "As recounted to the National Endowment for the Humanities and the 1947 Partition Archive: Ali Shan watched a mob kill his mother, brother, and two aunts during an attack on his village, and became the sole survivor of that attack on his family. He spent time alone in refugee camps as a young child before eventually rebuilding a life in the United States. Decades later, now a grandfather in the Bay Area, he has spoken publicly about deliberately choosing to forgive the people responsible, as part of his own path through that trauma.",
+    full: "As recounted to the National Endowment for the Humanities and the 1947 Partition Archive: Ali Shan watched a mob kill his mother, brother and two aunts during an attack on his village, and became the sole survivor of that attack on his family. He spent time alone in refugee camps as a young child before eventually rebuilding a life in the United States. Decades later, now a grandfather in the Bay Area, he has spoken publicly about deliberately choosing to forgive the people responsible, as part of his own path through that trauma.",
     sourceName: "Read the NEH's account of his story ↗",
     sourceUrl: "https://www.neh.gov/article/story-1947-partition-told-people-who-were-there"
   },
@@ -200,7 +200,7 @@ const STORIES = [
     place: "Amritsar to Lahore",
     summary: "A Punjab University professor who, decades later, still recalled fleeing a targeted Muslim neighbourhood in Amritsar on a train packed with refugees bound for Lahore.",
     quote: "A neighbourhood emptied itself onto a crowded train before the violence arrived.",
-    full: "As reported by Dawn and recorded by a 1947 Partition Archive volunteer: Zakariya, later a retired professor of Urdu literature at Punjab University, recalled his family leaving their Muslim neighbourhood in Amritsar shortly before it came under attack, then joining other families aboard trains packed with refugees bound for Lahore — carrying only what they could hold.",
+    full: "As reported by Dawn and recorded by a 1947 Partition Archive volunteer: Zakariya, later a retired professor of Urdu literature at Punjab University, recalled his family leaving their Muslim neighbourhood in Amritsar shortly before it came under attack, then joining other families aboard trains packed with refugees bound for Lahore, carrying only what they could hold.",
     sourceName: "Read Dawn's coverage of his and other recorded accounts ↗",
     sourceUrl: "https://www.dawn.com/news/1169309"
   },
@@ -222,20 +222,20 @@ const STORIES = [
     place: "Kolkata to Dhaka",
     summary: "Moved from Kolkata to Dhaka as a child and, decades later, is still living in a relief camp.",
     quote: "Still, after all these decades, in a relief camp.",
-    full: "As reported by the Bengal Gazette, drawing on a 1947 Partition Archive interview: Shahezadi Begam was displaced as a child from urban Kolkata to Dhaka in the Partition of Bengal. Unlike the Punjab corridor, Bengal's displacement continued in waves for years afterward — Shahezadi's own account reflects that longer, less sudden uprooting, and she remains, by this account, a resident of a relief camp to this day.",
+    full: "As reported by the Bengal Gazette, drawing on a 1947 Partition Archive interview: Shahezadi Begam was displaced as a child from urban Kolkata to Dhaka in the Partition of Bengal. Unlike the Punjab corridor, Bengal's displacement continued in waves for years afterward. Shahezadi's own account reflects that longer, less sudden uprooting, and by this account she remains a resident of a relief camp to this day.",
     sourceName: "Read the Bengal Gazette's coverage ↗",
     sourceUrl: "https://bengalgazette.org/2023/04/02/the-forgotten-survivors-the-two-voices-of-partition-refugees-in-bangladesh/"
   }
 ];
 
 /* REAL filmed/recorded interviews, held by the 1947 Partition Archive and
-   the Stanford Libraries' public exhibit of it — not hosted on this site,
+   the Stanford Libraries' public exhibit of it. Not hosted on this site,
    but linked to directly so visitors can watch or read the originals. */
 const INTERVIEWS = [
   {
     id: "i1",
     name: "Iqbal Bibi",
-    age: "—",
+    age: "Not stated",
     location: "Punjab / Sindh corridor",
     transcript: "Her fifteen-day journey from the Behram refugee camp to Lahore is recorded in full, in her own words, at the 1947 Partition Archive.",
     sourceUrl: "https://www.1947partitionarchive.org/iqbal-bibi/"
@@ -245,13 +245,13 @@ const INTERVIEWS = [
     name: "Sushila Balkrishna Wagh",
     age: "8 at Partition",
     location: "Karachi, Sindh",
-    transcript: "Interviewed by Yash Anil Pund for the 1947 Partition Archive, with Pankhuri Wagh as camera person — her full account of childhood in Karachi is published there.",
+    transcript: "Interviewed by Yash Anil Pund for the 1947 Partition Archive, with Pankhuri Wagh as camera person. Her full account of childhood in Karachi is published there.",
     sourceUrl: "https://www.1947partitionarchive.org/sushila-balkrishna-wagh/"
   },
   {
     id: "i3",
     name: "Mohammad Shamsul Alam Joarder",
-    age: "—",
+    age: "Not stated",
     location: "Dhaka, Bengal",
     transcript: "Recorded in Dhaka in 2012; his family worked at the Alliance Jute Mills. The interview, in Bengali with five video files, is held in the Stanford Libraries' public exhibit of the Archive's collection.",
     sourceUrl: "https://exhibits.stanford.edu/1947-partition/browse/interviews"
@@ -259,7 +259,7 @@ const INTERVIEWS = [
   {
     id: "i4",
     name: "Ahmed Ilias",
-    age: "—",
+    age: "Not stated",
     location: "Dhaka, Bangladesh",
     transcript: "Interviewed by Farhana Afroz in 2012, describing his Bihari identity and his decision to migrate to the eastern wing of Pakistan after Partition.",
     sourceUrl: "https://www.1947partitionarchive.org/"
@@ -267,24 +267,24 @@ const INTERVIEWS = [
 ];
 
 /* Real photographs, fetched live from Wikipedia (see js/experience.js) by
-   wikiTitle. Each is a genuine, identifiable historical subject — not a
-   staged or composite scene — with its caption describing what the photo
+   wikiTitle. Each is a genuine, identifiable historical subject, not a
+   staged or composite scene, with its caption describing what the photo
    actually shows. Falls back to a plain labelled frame if the fetch fails. */
 const GALLERY_ITEMS = [
-  { id: "g1", wikiTitle: "Partition of India", caption: "The Partition of India, August 1947 — the event this entire site retraces.", tag: "History" },
+  { id: "g1", wikiTitle: "Partition of India", caption: "The Partition of India, August 1947: the event this entire site retraces.", tag: "History" },
   { id: "g2", wikiTitle: "Radcliffe Line", caption: "The Radcliffe Line: the boundary drawn through Punjab and Bengal in five weeks.", tag: "Politics" },
-  { id: "g3", wikiTitle: "Direct Action Day", caption: "Direct Action Day, Calcutta, 16 August 1946 — a turning point on the road to Partition.", tag: "Loss" },
+  { id: "g3", wikiTitle: "Direct Action Day", caption: "Direct Action Day, Calcutta, 16 August 1946, a turning point on the road to Partition.", tag: "Loss" },
   { id: "g4", wikiTitle: "Noakhali riots", caption: "Gandhi listens to a survivor during his peace march through Noakhali, 1946.", tag: "Hope" },
-  { id: "g5", wikiTitle: "Punjab Boundary Force", caption: "The Punjab Boundary Force — the outmatched military effort to contain the violence of August 1947.", tag: "Migration" },
+  { id: "g5", wikiTitle: "Punjab Boundary Force", caption: "The Punjab Boundary Force, the outmatched military effort to contain the violence of August 1947.", tag: "Migration" },
   { id: "g6", wikiTitle: "Jawaharlal Nehru", caption: "Jawaharlal Nehru, who delivered India's \"Tryst with Destiny\" address at independence.", tag: "Politics" },
   { id: "g7", wikiTitle: "Attari–Wagah border ceremony", caption: "The daily Attari–Wagah border ceremony, performed in mirror image on both sides of the line, today.", tag: "Legacy" },
-  { id: "g8", wikiTitle: "Kolkata Partition Museum", caption: "The Kolkata Partition Museum — a newer institution documenting Partition from the Bengal side.", tag: "Legacy" }
+  { id: "g8", wikiTitle: "Kolkata Partition Museum", caption: "The Kolkata Partition Museum, a newer institution documenting Partition from the Bengal side.", tag: "Legacy" }
 ];
 
 const FILMS = [
   {
     id: "f1", title: "Train to Pakistan", year: "1998", country: "India", lens: "balanced",
-    desc: "Pamela Rooks's adaptation of Khushwant Singh's novel, set almost entirely in the fictional village of Mano Majra, follows the same restraint as the book — refusing to assign villainy to one community."
+    desc: "Pamela Rooks's adaptation of Khushwant Singh's novel, set almost entirely in the fictional village of Mano Majra, follows the same restraint as the book, refusing to assign villainy to one community."
   },
   {
     id: "f2", title: "Earth (1947 Earth)", year: "1998", country: "India", lens: "balanced",
@@ -308,12 +308,12 @@ const FILMS = [
   },
   {
     id: "f7", title: "Partition Voices (documentary strand)", year: "multiple", country: "UK/South Asia", lens: "balanced",
-    desc: "Umbrella term for oral-history documentary projects (BBC and others) built from recorded survivor testimony rather than dramatisation — the closest media form to this website's own Interview Archive."
+    desc: "Umbrella term for oral-history documentary projects (BBC and others) built from recorded survivor testimony rather than dramatisation. It is the media form closest to this website's own Interview Archive."
   }
 ];
 
 const STATS = [
-  { value: "14–16M", label: "People displaced", note: "Widely cited estimate of the number who crossed the new borders in 1947–48 — the largest mass migration in recorded history." },
+  { value: "14–16M", label: "People displaced", note: "Widely cited estimate of the number who crossed the new borders in 1947 to 1948, the largest mass migration in recorded history." },
   { value: "200K–2M", label: "Estimated deaths", note: "Historians' estimates vary widely and remain contested; no official census of the dead was ever completed." },
   { value: "~75,000", label: "Women abducted", note: "Estimated number of women abducted across both new borders, per government recovery operation records cited by historians." },
   { value: "2", label: "New nations", note: "India and Pakistan, born within a day of each other in August 1947." },
@@ -331,7 +331,7 @@ const REFLECTION_SEED = [
 const MAP_REGIONS = {
   punjab: {
     name: "Punjab",
-    fact: "Split almost exactly down the middle, Punjab saw the most concentrated violence and the largest single migration corridor of the entire Partition — Sikhs and Hindus moving east, Muslims moving west, often past each other on the same roads.",
+    fact: "Split almost exactly down the middle, Punjab saw the most concentrated violence and the largest single migration corridor of the entire Partition. Sikhs and Hindus moved east and Muslims moved west, often past each other on the same roads.",
     displaced: "≈10 million",
     routes: "Lahore ↔ Amritsar, Sialkot ↔ Jammu, Multan ↔ Ferozepur"
   },
@@ -343,7 +343,7 @@ const MAP_REGIONS = {
   },
   sindh: {
     name: "Sindh",
-    fact: "Home to a large, long-settled Hindu and Sikh trading population, most of whom left for India by sea and rail in 1947–48 — a migration that receives comparatively little attention next to Punjab and Bengal.",
+    fact: "Home to a large, long-settled Hindu and Sikh trading population, most of whom left for India by sea and rail in 1947 to 1948. This migration receives comparatively little attention next to Punjab and Bengal.",
     displaced: "≈1.2–1.4 million",
     routes: "Karachi ↔ Bombay (by sea), Hyderabad (Sindh) ↔ Jodhpur"
   },

@@ -1,5 +1,5 @@
 /* =========================================================================
-   THE LAST JOURNEY — Stories of the 1947 India–Pakistan Partition
+   THE LAST JOURNEY Stories of the 1947 India–Pakistan Partition
    Stylesheet: parchment / sepia / railway theme
    ========================================================================= */
 
@@ -756,12 +756,12 @@ footer.finale a{ color: var(--brass-light); }
 }
 
 /* ==========================================================================
-   THE EXPERIENCE LAYER — atmosphere, HUD, cursor, tilt, numerals, magnetism
+   THE EXPERIENCE LAYER atmosphere, HUD, cursor, tilt, numerals, magnetism
    ========================================================================== */
 
 /* Scroll-driven atmosphere: a window-frame vignette (top trim + side rails)
    that shifts colour with the journey, from dawn calm through unrest and
-   migration to dusk remembrance — deliberately kept to the frame, never
+   migration to dusk remembrance deliberately kept to the frame, never
    the reading area, so body text contrast never depends on the mood. */
 .atmosphere{
   position: fixed; inset: 0; z-index: 150;
@@ -784,7 +784,7 @@ footer.finale a{ color: var(--brass-light); }
   pointer-events: none; user-select: none; line-height: 1;
 }
 
-/* Journey HUD — a small live readout, like a depth gauge for the train line */
+/* Journey HUD a small live readout, like a depth gauge for the train line */
 .journey-hud{
   position: fixed; left: 1rem; bottom: 1rem; z-index: 300;
   background: rgba(27,20,11,.82); color: var(--cream);
@@ -806,7 +806,7 @@ footer.finale a{ color: var(--brass-light); }
   .journey-hud__mood{ display: none; }
 }
 
-/* Trailing cursor ring (desktop, fine pointers only — added by JS so no FOUC) */
+/* Trailing cursor ring (desktop, fine pointers only added by JS so no FOUC) */
 .cursor-ring{
   position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%;
   border: 1.5px solid var(--brass-light); z-index: 2000; pointer-events: none;

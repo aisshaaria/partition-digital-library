@@ -1,5 +1,5 @@
 /* =========================================================================
-   THE LAST JOURNEY — interactivity
+   THE LAST JOURNEY: interactivity
    Vanilla JS, no build step, no external dependencies besides the fonts
    loaded in the stylesheet. Organised as small independent modules that
    each wire up one piece of the page.
@@ -112,7 +112,7 @@
     if (!target) return;
     if (!silent) {
       TrainAudio.whistle();
-      announceWhistle("Whistle blows — the compartment door slides open");
+      announceWhistle("Whistle blows: the compartment door slides open");
       doorTransition.classList.add("is-active");
       setTimeout(() => doorTransition.classList.remove("is-active"), 950);
     }
@@ -300,7 +300,7 @@
     matches.slice(0, 8).forEach(m => {
       const a = document.createElement("a");
       a.href = m.section;
-      a.textContent = `${m.title} — ${m.type}`;
+      a.textContent = `${m.title}: ${m.type}`;
       a.addEventListener("click", ev => {
         ev.preventDefault();
         closeSettings();
@@ -418,7 +418,7 @@
         <h3>${s.name}</h3>
         <blockquote class="quote-block">${s.quote}</blockquote>
         <p>${s.full}</p>
-        <p style="font-size:.85rem; color:var(--text-soft);">This is this site's own short summary of a publicly documented account, not a verbatim transcript — read ${s.name.split(" ")[0]}'s story in full, and in their own words, at the source below.</p>
+        <p style="font-size:.85rem; color:var(--text-soft);">This is this site's own short summary of a publicly documented account, not a verbatim transcript. Read ${s.name.split(" ")[0]}'s story in full, in their own words, at the source below.</p>
         <a class="btn secondary" href="${s.sourceUrl}" target="_blank" rel="noopener noreferrer">${s.sourceName}</a>
         <div style="margin-top:1rem;">${s.tags.map(t => `<span class="archive-chip">${t}</span>`).join("")}</div>
       `));
@@ -474,7 +474,7 @@
         img.alt = btn.dataset.resolvedTitle || g.caption;
         img.style.display = "";
         const creditUrl = btn.dataset.resolvedCreditUrl;
-        cap.innerHTML = g.caption + (creditUrl ? ` — <a href="${creditUrl}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a>` : "");
+        cap.innerHTML = g.caption + (creditUrl ? ` <a href="${creditUrl}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a>` : "");
       } else {
         img.removeAttribute("src");
         img.style.display = "none";

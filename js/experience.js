@@ -1,5 +1,5 @@
 /* =========================================================================
-   THE LAST JOURNEY — experience layer
+   THE LAST JOURNEY: experience layer
    Scroll-driven atmosphere, a live journey HUD, a trailing cursor ring,
    magnetic buttons, tilting cards, count-up statistics, and live research
    photography pulled from Wikipedia's public summary API at runtime.
@@ -207,7 +207,7 @@
   setTimeout(watchStatValues, 0);
 
   /* ---------------------------------------------------------------------
-     Live research photography — Wikipedia REST summary API
+     Live research photography: Wikipedia REST summary API
      Progressive enhancement: every element already has real written
      content; this only adds a genuine photograph and a source link when
      the fetch succeeds, and fails silently (keeping the text-only
@@ -283,7 +283,7 @@
   }
 
   function settleFallback(el) {
-    // Fetch didn't pan out (offline, blocked, Wikipedia unreachable) — stop
+    // Fetch didn't pan out (offline, blocked, Wikipedia unreachable). Stop
     // claiming to be "loading" and settle on the plain descriptive label.
     const loading = el.querySelector(".figure-loading");
     if (loading) loading.remove();
@@ -310,7 +310,7 @@
   window.TLJ = window.TLJ || {};
   window.TLJ.hydrateFigures = hydrateWikiFigures;
 
-  /* Gallery frames are <button>s — a nested <a> credit link would be invalid
+  /* Gallery frames are <button>s. A nested <a> credit link would be invalid
      HTML there, so these resolve onto data attributes instead and the
      credit is shown in the lightbox caption (main.js) when opened. */
   function hydrateGalleryFigures() {
