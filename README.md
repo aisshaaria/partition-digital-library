@@ -12,6 +12,7 @@ by anyone with a text editor.
 
 ```
 index.html        The entire site: hero + all 16 "carriages" (sections)
+sources.html      Sources & Citations — every reference used, linked in full
 css/style.css     All styling — sepia/parchment theme, layout, animations
 js/content.js     All content data (timeline, stories, interviews, films,
                   gallery captions, statistics, reflections, search index)
